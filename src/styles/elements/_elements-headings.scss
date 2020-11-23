@@ -1,0 +1,49 @@
+h1,
+.h1-like,
+h2,
+.h2-like,
+h3,
+.h3-like,
+h4,
+.h4-like-title,
+.h4-like,
+h5,
+.h5-like,
+h6,
+.h6-like {
+    font-family: "Gochi Hand", cursive;
+    padding: 0;
+    margin: 0;
+}
+
+h1,
+.h1-like {
+    font-size: 24px;
+    line-height: 26px;
+}
+
+h2,
+.h2-like {
+    font-size: 22px;
+    line-height: 24px;
+}
+
+h3,
+.h3-like {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+h4,
+.h4-like,
+.h4-like-title {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 900;
+}
+
+h5,
+.h5-like {
+    font-size: 16px;
+    line-height: 18px;
+}

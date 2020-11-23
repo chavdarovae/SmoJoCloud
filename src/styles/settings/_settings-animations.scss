@@ -1,0 +1,41 @@
+@keyframes fancy-list {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes delayed-apearance {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+// album animations
+/* first image */
+@keyframes image1 {
+	0%   { transform: rotate(0deg) translate(0, 0) scale(1.0); }
+	100% { transform: rotate(-6deg) translate(-100px, -3px) scale(1.1); }
+}
+
+/* second image:  webkit */
+@keyframes image2 {
+	0%   { transform: rotate(0deg) translate(0, 0) scale(1.0); }
+	100% { transform: rotate(0deg) translate(0, -3px) scale(1.1); }
+}
+
+/* third image:  webkit */
+@keyframes image3 {
+	0%   { transform: rotate(0deg) translate(0, 0) scale(1.0); }
+	100% { transform: rotate(6deg) translate(100px, -3px) scale(1.1); }
+}
+

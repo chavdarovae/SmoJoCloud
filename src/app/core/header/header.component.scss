@@ -1,0 +1,41 @@
+@import "../../../styles.scss";
+
+.header {
+    height: 120px;
+    width: 100%;
+
+    .container {
+        height: 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__img {
+        height: auto;
+        width: 100px;
+        position: absolute;
+        top: 60px;
+        right: 220px;
+        z-index: 3;
+    }
+}
+
+.logo {
+    position: relative;
+
+    &__img {
+        height: auto;
+        width: 200px;
+    }
+
+    &::after {
+        content: "SmoJo Cloude";
+        display: inline;
+        position: absolute;
+        font-size: 30px;
+        color: #fff;
+        top: 50px;
+        left: 20px;
+    }
+}

@@ -1,0 +1,37 @@
+
+@import "./styles/settings/_settings-colors.scss";
+@import "./styles/settings/_settings-animations.scss";
+@import "./styles/settings/_settings-place-holders.scss";
+@import "./styles/settings/_settings-breakpoints.scss";
+@import "./styles/settings/_settings-shadows.scss";
+@import "./styles/settings/_settings-borders.scss";
+
+@import "./styles/generic/_generic-normalize.scss";
+@import "./styles/generic/_generic-fonts.scss";
+@import "./styles/generic/_generic-scrollbar.scss";
+@import "./styles/generic/_generic-selection.scss";
+
+@import "./styles/elements/_elements-body.scss";
+@import "./styles/elements/_elements-paragraphs.scss";
+@import "./styles/elements/_elements-headings.scss";
+@import "./styles/elements/_elements-lists.scss";
+@import "./styles/elements/_elements-list-items.scss";
+@import "./styles/elements/_elements-images.scss";
+@import "./styles/elements/_elements-links.scss";
+
+@import "./styles/objects/_objects-containers.scss";
+@import "./styles/objects/_objects-text-like-list.scss";
+
+
+@import "./styles/utilities/_utilities-centered.scss";
+@import "./styles/utilities/_utilities-hidden.scss";
+@import "./styles/utilities/_utilities-invisible.scss";
+@import "./styles/utilities/_utilities-animations.scss";
+@import "./styles/utilities/_utilities-page-title.scss";
+
+
+
+.content-body { 
+    display: grid;
+    grid-template-rows: 120px 1fr 20px;
+}

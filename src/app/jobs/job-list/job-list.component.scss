@@ -1,0 +1,103 @@
+@import "../../../styles.scss";
+
+.jobs-section {
+    width: 100%;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 300px 300px 300px;
+    row-gap: 50px;
+
+    &__title {
+        grid-column: -1 / 1;
+        justify-self: center;
+    }
+}
+
+.job {
+    width: $sticky-note-dim;
+    height: $sticky-note-dim;
+    box-shadow: $sticky-note-shadow;
+    padding: 30px 15px;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 200px 60px;
+    grid-template-rows: 1fr 70px 50px;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas:
+        "title title"
+        "location location"
+        "timeFrame cost"
+        "timeFrame cost";
+
+    &--pink {
+        background-color: $sticky-note-col-pink;
+        transform: rotate(-15deg);
+    }
+
+    &--yellow{
+        background-color: $sticky-note-col-yellow;
+        transform: rotate(8deg);
+    }
+
+    &--blue{
+        background-color: $sticky-note-col-blue;
+        transform: rotate(15deg);
+    }
+
+    &--green{
+        background-color: $sticky-note-col-green;
+        transform: rotate(-7deg);
+    }
+
+    &__title {
+        grid-area: title;
+        grid-column: -1 / 1;
+        font-size: 30px;
+        min-height: 100px;
+    }
+
+    &__location {
+        grid-area: location;
+        grid-column: -1 / 1;
+        display: flex;
+        flex-flow: row nowrap;
+        transform: rotate(5deg);
+
+        span {
+            font-size: 24px;
+        }
+
+        i {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+    }
+
+    &__description {
+        grid-area: description;
+        display: none;
+    }
+
+    &__timeFrame {
+        grid-area: timeFrame;
+    }
+
+    &__cost {
+        grid-area: cost;
+        text-decoration: underline;
+        font-size: 24px;
+        align-self: end;
+        transform: rotate(-5deg);
+
+        &::after {
+            content: "$";
+            display: inline-block;
+            margin-left: 3px;
+        }
+    }
+}
