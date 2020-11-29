@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SmoJoCloud';
+
+  get isReady():boolean {
+    return this.userService.currUser !== undefined;
+  }
+
+  constructor(
+    private userService: UserService
+  ) { }
 }

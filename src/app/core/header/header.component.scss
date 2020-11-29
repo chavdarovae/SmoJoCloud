@@ -8,34 +8,91 @@
         height: 120px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        position: relative;
     }
 
-    &__img {
-        height: auto;
-        width: 100px;
+    &__logo,
+    &__avatar {
         position: absolute;
-        top: 60px;
-        right: 220px;
-        z-index: 3;
+    }
+
+    &__logo {
+        right: 0;
+        top: 20px;
+        z-index: 2;
+    }
+
+    &__avatar {
+        right: 0;
+        top: 0;
+        z-index: 1;
     }
 }
 
 .logo {
-    position: relative;
-
     &__img {
         height: auto;
         width: 200px;
     }
 
     &::after {
-        content: "SmoJo Cloude";
+        content: "SmoJo Cloud";
         display: inline;
         position: absolute;
         font-size: 30px;
         color: #fff;
         top: 50px;
-        left: 20px;
+        left: 15px;
     }
+}
+
+
+.avatar {
+
+    &__img {
+        height: auto;
+        width: 100px;
+    }
+
+    &__icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+
+        i{
+            font-size: 28px;
+            color: white;
+            padding-top: 3px;
+
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+
+    &__menu{
+        display: none;
+    }
+
+    &__menu-triger{
+        display: none;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    &__menu-triger:checked + &__menu {
+        display: flex;
+    }
+
 }

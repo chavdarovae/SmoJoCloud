@@ -1,10 +1,17 @@
-<div class="container home">
-    <a class="home__action home__action--search" routerLink="/jobs/search">I search...</a>
-    <div class="home__action home__action--job">JOB</div>
-    <a class="home__action home__action--freelance" routerLink="/jobs/offer">I offer...</a>
-    <div class="home__img">
-        <img src="../../assets/img/home-page.jpg" alt="Gender equality in research aims to... - Information Centre - Research &amp;  Innovation - European Commission" class="n3VNCb" src="https://ec.europa.eu/research/headlines/news/images/23_07_19_small.jpg">
+<!-- <ng-container *ngIf="!isLogged">Loading...</ng-container> -->
+<ng-container *ngIf="true">
+    <div class="container home">
+        <a class="home__action home__action--search" routerLink="/jobs/search">I search...</a>
+        <div class="home__action home__action--job">JOB</div>
+        <a class="home__action home__action--freelance" routerLink="/jobs/offer">I offer...</a>
+        <div class="home__img">
+            <img src="../../assets/img/home-page.jpg"
+                alt="Gender equality in research aims to... - Information Centre - Research &amp;  Innovation - European Commission"
+                class="n3VNCb" src="https://ec.europa.eu/research/headlines/news/images/23_07_19_small.jpg">
+        </div>
+        <a routerLink="/login" class="home__signin">
+            <img src="../../assets/icon/noun_Mouse Hole_125505.png"
+                alt="Cloud by Aleksandr Vector from the Noun Project">
+        </a>
     </div>
-</div>
-
-
+</ng-container>

@@ -19,6 +19,9 @@
 @import "./styles/elements/_elements-images.scss";
 @import "./styles/elements/_elements-links.scss";
 
+@import "./styles/components/_components-form.scss";
+@import "./styles/components/_components-menu.scss";
+
 @import "./styles/objects/_objects-containers.scss";
 @import "./styles/objects/_objects-text-like-list.scss";
 
@@ -34,4 +37,16 @@
 .content-body { 
     display: grid;
     grid-template-rows: 120px 1fr 20px;
+}
+
+.drop-off { 
+    position: absolute;
+    z-index: 99;
+    background-color: #000;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
 }

@@ -45,4 +45,21 @@
             left: 630px;
         }
     }
+
+    &__signin {
+        height: auto;
+        width: 70px;
+        position: absolute;
+        top: 80.5%;
+        left: 45.8%;
+        z-index: 1;
+
+        img {
+            background-color: #373538;
+
+            &:hover {
+                background-color: $primary-color;
+            }
+        }
+    }
 }

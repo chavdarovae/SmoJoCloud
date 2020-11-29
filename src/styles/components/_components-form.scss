@@ -1,0 +1,30 @@
+.form {
+    background-color: $primary-color;
+    padding: 30px 15px;
+    border-radius: 5px;
+    min-width: 300px;
+    max-width: 500px;
+    width: 400px;
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+
+    &__group {
+        display: flex;
+        flex-flow: column wrap;
+        margin-bottom: 30px;
+    }
+
+    &__control {
+        display: flex;
+    }
+
+    &__btn-line {
+        display: flex;
+        justify-content: center;
+    }
+}

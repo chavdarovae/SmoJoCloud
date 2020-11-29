@@ -2,9 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const applicationId = 'D5B2B971-C14A-548A-FF57-6688231F8D00';
+const RESTApiKey = '09493139-2050-470E-8BD2-83D7D7097D09';
+
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: `https://api.backendless.com/${applicationId}/${RESTApiKey}`
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

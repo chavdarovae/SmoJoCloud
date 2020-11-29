@@ -7,9 +7,14 @@
     grid-template-columns: 300px 300px 300px;
     row-gap: 50px;
 
-    &__title {
+    &__filter {
         grid-column: -1 / 1;
+        max-width: fit-content;
+        width: fit-content;
         justify-self: center;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
     }
 }
 

@@ -1,0 +1,72 @@
+<div class="container register column column--centered">
+  
+    <form #registerForm="ngForm"  class="form" (ngSubmit)="submitHandler(registerForm.value)">
+
+        <div class="form__group">
+            <label for="email">Email address</label>
+            <input #emailInput="ngModel" ngModel name="email" type="text" id="email" class="form__control"
+                placeholder="john.doe@domain.bg" required pattern="[a-zA-Z0-9\._-]{6,}@gmail\.(com|bg)">
+            <!-- notification message email -->
+            <ng-template #emailError>
+                <div class="notification-message notification-message--error">
+                    <span *ngIf="emailInput.errors?.required">Please, input a gmail address!</span>
+                    <span *ngIf="emailInput.errors?.pattern">Please, input a valid gmail address!</span>
+                </div>
+            </ng-template>
+            <ng-template #validationConfirmation let-case='caseIdentifier'>
+                <div class="notification-message notification-message--ok">{{case}} validated!</div>
+            </ng-template>
+            <ng-container *ngIf="emailInput.touched">
+                <ng-container
+                    *ngTemplateOutlet="emailInput.invalid ? emailError : validationConfirmation; context: {caseIdentifier: 'Email input'}">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div #passwordGroup="ngModelGroup" ngModelGroup="passwords"
+            [ngClass]="{'pass-dismatch': passwordInput.touched && rePasswordInput.touched && passwordGroup.errors?.passwardsDoNotMatch}"
+            appVerifyPasswordMatch>
+            <div class="form__group">
+                <label for="password">Password</label>
+                <input #passwordInput="ngModel" ngModel name="password" type="password" id="password" class="form__control"
+                    placeholder="************" required minlength="6">
+                <!-- notification message password -->
+                <ng-template #passwordError>
+                    <div class="notification-message notification-message--error">
+                        <span *ngIf="passwordInput.errors?.required">Please, input a password!</span>
+                        <span *ngIf="passwordInput.errors?.minlength">Password should be at least 6 characters
+                            long!</span>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="passwordInput.touched">
+                    <ng-container
+                        *ngTemplateOutlet="passwordInput.invalid? passwordError : validationConfirmation; context: {caseIdentifier: 'Password input'}">
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="form__group">
+                <label for="rePassword">Re-Password</label>
+                <input #rePasswordInput="ngModel" ngModel name="rePassword" type="password" id="rePassword"
+                    class="form__control" placeholder="************" required>
+                <!-- notification message repassword -->
+                <ng-template #rePasswordError>
+                    <div class="notification-message notification-message--error">
+                        <span *ngIf="rePasswordInput.errors?.required">Please, input a password!</span>
+                        <span *ngIf="passwordGroup.errors?.passwardsDoNotMatch">Passwords do not match!</span>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="rePasswordInput.touched">
+                    <ng-container
+                        *ngTemplateOutlet="rePasswordInput.invalid || passwordGroup.errors?.passwardsDoNotMatch ? rePasswordError : validationConfirmation; context: {caseIdentifier: 'Repeat password input'}">
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="form__btn-line">
+            <button [disabled]="registerForm.invalid" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+    
+    <p>Already Registered? <a routerLink="/login">Login</a>.</p>
+</div>

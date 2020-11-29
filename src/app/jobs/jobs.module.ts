@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobRoutingModule } from './job-routing.module';
-import { MaterialModule } from '../material/material.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 
@@ -11,7 +12,7 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     JobRoutingModule,
-    MaterialModule
+    FontAwesomeModule
   ],
   exports: [JobListComponent],
 

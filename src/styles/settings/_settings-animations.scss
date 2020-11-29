@@ -1,3 +1,15 @@
+@keyframes cloud-float {
+    0% {
+        right: 0;
+        top: 20px;
+    }
+
+    100% {
+        right: calc(100% - 250px);
+        top: 20px;
+    }
+}
+
 @keyframes fancy-list {
     0% {
         transform: translateX(50px);
