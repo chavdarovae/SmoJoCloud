@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
 
@@ -9,8 +9,15 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class HeaderComponent {
 
+  showUserMenu: boolean = false;
+  // @ViewChild ('userMenu') userMenu: ElementRef<HTMLElement>;
+
   get userIsLogged (){
     return this.userService.isLogged;
+  }
+
+  get name (){
+    return (this.userService.currUser.userName).match(/(.*)+(?=@)/g)[0];
   }
 
   constructor(
@@ -24,5 +31,4 @@ export class HeaderComponent {
       this.router.navigate(['']);
     });
   }
-
 }

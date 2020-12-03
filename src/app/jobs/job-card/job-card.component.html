@@ -1,0 +1,14 @@
+<article *ngIf="job" class="job job--{{job.color}}">
+    <div class="job__pin"></div>
+    <span class="job__title h2-like">{{job.job}}</span>
+    <span class="job__title h2-like hidden">{{job.category}}</span>
+    <div class="job__location">
+        <i class="fas fa-map-marker-alt"></i>
+        <span class="h3-like"> {{job.location}}</span>
+    </div>
+    <p class="job__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique a? In
+        sequi magnam cum nisi suscipit autem necessitatibus, facilis, accusamus assumenda similique beatae, quaerat
+        provident reprehenderit recusandae ut ullam.</p>
+    <span class="job__timeFrame h3-like">until 13.06</span>
+    <span class="job__cost h5-like h3-like">12.6</span>
+</article>

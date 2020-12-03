@@ -1,0 +1,82 @@
+<div class="container job-new column column--centered">
+
+    <form #jobForm="ngForm" class="form" (ngSubmit)="submitHandler(jobForm.value)">
+
+        <div class="form__line">
+            <input #optionSerachInput="ngModel" ngModel name="option" type="radio" id="search" value="search"class="form__control" required>
+            <label for="search">I search somebody to...</label>
+        </div>
+
+        <div class="form__line">
+            <input #optionSerachInput="ngModel" ngModel name="option" type="radio" id="offer" value="offer" class="form__control" required>
+            <label for="offer">I offer to...</label>
+        </div>
+
+        <div class="form__group">
+            <label for="job">Job title</label>
+            <input #jobInput="ngModel" ngModel name="job" type="text" id="job" class="form__control"
+                placeholder="Anybody willling to mow the lawn?" required minlength='7'>
+            <!-- notification-message job -->
+            <ng-template #jobError>
+                <div class="notification-message notification-message--error">
+                    <span *ngIf="jobInput.errors?.required">Please, input a valid job!</span>
+                    <span *ngIf="jobInput.errors?.minlength">The job title should be at least 7 characters
+                        long!</span>
+                </div>
+            </ng-template>
+            <ng-template #validationConfirmation let-case='caseIdentifier'>
+                <div class="notification-message notification-message--ok">{{case}} validated!</div>
+            </ng-template>
+            <ng-container *ngIf="jobInput.touched">
+                <ng-container
+                    *ngTemplateOutlet="jobInput.invalid ? jobError : validationConfirmation; context: {caseIdentifier: 'Job input'}">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="form__group">
+            <label for="category">Select job category</label>
+            <select #categorySelect='ngModel' ngModel name="category" id="category" class="form__control" required>
+                <option value="" disabled>Choose a job category</option>
+                <option *ngFor="let cat of categories" [ngValue]="cat.value">
+                    {{ cat.title }}
+                </option>
+            </select>
+            <!-- notification-message category -->
+            <ng-template #categoryError>
+                <div class="notification-message notification-message--error">
+                    <span *ngIf="categorySelect.errors?.required">Please, select a job category!</span>
+                </div>
+            </ng-template>
+            <ng-container *ngIf="categorySelect.touched">
+                <ng-container
+                    *ngTemplateOutlet="categorySelect.invalid ? categoryError : validationConfirmation; context: {caseIdentifier: 'Job Category select'}">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="form__group">
+            <label for="location">Job location</label>
+            <input #locationInput='ngModel' ngModel name="location" type="text" id="location" class="form__control"
+                required>
+            <!-- notification-message location -->
+            <ng-template #locationError>
+                <div class="notification-message notification-message--error">
+                    <span *ngIf="locationInput.errors?.required">Please, select a job location!</span>
+                </div>
+            </ng-template>
+            <ng-container *ngIf="locationInput.touched">
+                <ng-container
+                    *ngTemplateOutlet="locationInput.invalid ? locationError : validationConfirmation; context: {caseIdentifier: 'Job location input'}">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="form__btn-line">
+            <button [disabled]="jobForm.invalid" class="btn">Post</button>
+        </div>
+    </form>
+    {{jobForm.value | json}}
+
+    <p>Don't have account yet? <a routerLink="/register">Register</a>.</p>
+</div>

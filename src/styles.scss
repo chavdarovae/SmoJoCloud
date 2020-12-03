@@ -21,6 +21,8 @@
 
 @import "./styles/components/_components-form.scss";
 @import "./styles/components/_components-menu.scss";
+@import "./styles/components/_components-notifications.scss";
+
 
 @import "./styles/objects/_objects-containers.scss";
 @import "./styles/objects/_objects-text-like-list.scss";
@@ -50,3 +52,15 @@
     bottom: 0;
     display: none;
 }
+
+.backdrop {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.2;
+}
+
+

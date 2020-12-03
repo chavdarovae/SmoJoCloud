@@ -12,6 +12,15 @@
         margin-bottom: 30px;
     }
 
+    &__line {
+        min-width: 500px;
+        max-width: 1000px;
+        width: 1000px;
+        display: flex;
+        flex-flow: row nowrap;
+        margin-bottom: 30px;
+        justify-content: space-around;
+    }
 
     &__group {
         display: flex;

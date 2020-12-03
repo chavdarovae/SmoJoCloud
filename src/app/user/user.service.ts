@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { shareReplay, tap } from 'rxjs/operators';
-import { IUser, IUserRes } from '../shared/user.interface';
+import { IUser, IUserRes } from '../shared/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class UserService {
 
   login(email: string, password: string) {
     return this.http.post('users/login', { 'login': email, 'password': password }).pipe(tap((user: IUserRes ) => {
-      this.currUser = { userName: user['username'], userToken: user['user-token'] };
+      this.currUser = { userName: user['username'], userToken: user['user-token'], userId: user['ownerId'] };
       localStorage.setItem('curr-user', JSON.stringify(this.currUser));
     }))
   }

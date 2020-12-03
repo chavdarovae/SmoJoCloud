@@ -2,21 +2,44 @@
 
 .home {
     margin: 0 auto;
-    width: 1000px;
-    height: auto;
-    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    justify-content: center;
+    align-content: center;
+    row-gap: 20px;
+
+    @include for-tablet-landscape-up {
+        grid-template-columns: 300px 200px 300px;
+        column-gap: 100px;
+    }
 
     &__img {
-        width: 1000px;
         height: auto;
+        position: relative;
+
+        
+        &--search {
+            justify-self: start;
+        }
+
+        &--freelance {
+            justify-self: end;
+        }
+
+        &--job {
+            width: 100px;
+            align-self: start;
+        }
     }
 
     &__action {
         background-color: #fff;
         border: 6px solid $secondary-color;
-        width: 300px;
-        height: 75px;
-        font-size: 50px;
+        width: 80%;
+        height: 12%;
+        font-size: 25px;
         font-family: "Gochi Hand", cursive;
         display: flex;
         justify-content: center;
@@ -24,11 +47,9 @@
         // box-shadow: $primary-shadow;
         position: absolute;
         z-index: 2;
-
-        &--search {
-            top: 300px;
-            left: 75px;
-        }
+        top: 55%;
+        left: 50%;
+        transform: translateX(-50%);
 
         &--job {
             top: 310px;
@@ -38,28 +59,6 @@
             border-radius: 50%;
             background-color: $primary-color;
             color: #fff;
-        }
-
-        &--freelance {
-            top: 300px;
-            left: 630px;
-        }
-    }
-
-    &__signin {
-        height: auto;
-        width: 70px;
-        position: absolute;
-        top: 80.5%;
-        left: 45.8%;
-        z-index: 1;
-
-        img {
-            background-color: #373538;
-
-            &:hover {
-                background-color: $primary-color;
-            }
-        }
+        }      
     }
 }

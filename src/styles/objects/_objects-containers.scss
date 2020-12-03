@@ -1,16 +1,22 @@
 .container {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
+
+    @include for-phone-up {
+        width: 500px;
+    }
+
+    @include for-tablet-portrait-up {
+        width: 800px;
+    }
 
     @include for-tablet-landscape-up {
-        max-width: 1000px;
+        width: 1000px;
     }
 
     @include for-desktop-up {
-        max-width: 1290px;
+        width: 1200px;
     }
 }
 

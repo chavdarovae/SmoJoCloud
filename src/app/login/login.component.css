@@ -9,7 +9,7 @@
     top: 20px;
   }
   100% {
-    right: calc(100% - 250px);
+    right: calc(100% - 200px);
     top: 20px;
   }
 }
@@ -19,7 +19,7 @@
     top: 20px;
   }
   100% {
-    right: calc(100% - 250px);
+    right: calc(100% - 200px);
     top: 20px;
   }
 }
@@ -546,6 +546,22 @@ a:hover {
   margin-bottom: 30px;
 }
 
+.form__line {
+  min-width: 500px;
+  max-width: 1000px;
+  width: 1000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  margin-bottom: 30px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .form__group {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -611,29 +627,63 @@ a:hover {
   color: #585858;
 }
 
+.notification-message {
+  font-style: italic;
+}
+
+.notification-message--error {
+  color: darkred;
+}
+
+.notification-message--ok {
+  color: darkgreen;
+}
+
+input.ng-valid.ng-dirty.ng-touched {
+  border-left: 5px solid darkgreen;
+  /* green */
+}
+
+input.ng-invalid:not(form).ng-touched {
+  border-left: 5px solid darkred;
+  /* red */
+}
+
+input.ng-invalid:not(form).ng-touched.password-group {
+  border: none;
+}
+
+.pass-dismatch input.ng-valid.ng-dirty.ng-touched {
+  border-left: 5px solid darkred;
+  /* red */
+}
+
 .container {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+}
+
+@media (max-width: 599px) {
+  .container {
+    width: 500px;
+  }
+}
+
+@media (min-width: 600px) {
+  .container {
+    width: 800px;
+  }
 }
 
 @media (min-width: 900px) {
   .container {
-    max-width: 1000px;
+    width: 1000px;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1290px;
+    width: 1200px;
   }
 }
 
@@ -776,8 +826,8 @@ a:hover {
 }
 
 .animations-cloud-float {
-  -webkit-animation-duration: 3000ms;
-          animation-duration: 3000ms;
+  -webkit-animation-duration: 30000ms;
+          animation-duration: 30000ms;
   -webkit-animation-timing-function: ease-out;
           animation-timing-function: ease-out;
   -webkit-animation-iteration-count: 1;
@@ -958,4 +1008,14 @@ a:hover {
   right: 0;
   bottom: 0;
   display: none;
+}
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.2;
 }

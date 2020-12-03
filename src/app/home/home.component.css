@@ -9,7 +9,7 @@
     top: 20px;
   }
   100% {
-    right: calc(100% - 250px);
+    right: calc(100% - 200px);
     top: 20px;
   }
 }
@@ -19,7 +19,7 @@
     top: 20px;
   }
   100% {
-    right: calc(100% - 250px);
+    right: calc(100% - 200px);
     top: 20px;
   }
 }
@@ -546,6 +546,22 @@ a:hover {
   margin-bottom: 30px;
 }
 
+.form__line {
+  min-width: 500px;
+  max-width: 1000px;
+  width: 1000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  margin-bottom: 30px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .form__group {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -611,29 +627,63 @@ a:hover {
   color: #585858;
 }
 
+.notification-message {
+  font-style: italic;
+}
+
+.notification-message--error {
+  color: darkred;
+}
+
+.notification-message--ok {
+  color: darkgreen;
+}
+
+input.ng-valid.ng-dirty.ng-touched {
+  border-left: 5px solid darkgreen;
+  /* green */
+}
+
+input.ng-invalid:not(form).ng-touched {
+  border-left: 5px solid darkred;
+  /* red */
+}
+
+input.ng-invalid:not(form).ng-touched.password-group {
+  border: none;
+}
+
+.pass-dismatch input.ng-valid.ng-dirty.ng-touched {
+  border-left: 5px solid darkred;
+  /* red */
+}
+
 .container {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+}
+
+@media (max-width: 599px) {
+  .container {
+    width: 500px;
+  }
+}
+
+@media (min-width: 600px) {
+  .container {
+    width: 800px;
+  }
 }
 
 @media (min-width: 900px) {
   .container {
-    max-width: 1000px;
+    width: 1000px;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1290px;
+    width: 1200px;
   }
 }
 
@@ -776,8 +826,8 @@ a:hover {
 }
 
 .animations-cloud-float {
-  -webkit-animation-duration: 3000ms;
-          animation-duration: 3000ms;
+  -webkit-animation-duration: 30000ms;
+          animation-duration: 30000ms;
   -webkit-animation-timing-function: ease-out;
           animation-timing-function: ease-out;
   -webkit-animation-iteration-count: 1;
@@ -960,24 +1010,68 @@ a:hover {
   display: none;
 }
 
+.backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.2;
+}
+
 .home {
   margin: 0 auto;
-  width: 1000px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  justify-items: stretch;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  row-gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .home {
+    -ms-grid-columns: 300px 200px 300px;
+        grid-template-columns: 300px 200px 300px;
+    -webkit-column-gap: 100px;
+            column-gap: 100px;
+  }
+}
+
+.home__img {
   height: auto;
   position: relative;
 }
 
-.home__img {
-  width: 1000px;
-  height: auto;
+.home__img--search {
+  -ms-grid-column-align: start;
+      justify-self: start;
+}
+
+.home__img--freelance {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.home__img--job {
+  width: 100px;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
 }
 
 .home__action {
   background-color: #fff;
   border: 6px solid #363538;
-  width: 300px;
-  height: 75px;
-  font-size: 50px;
+  width: 80%;
+  height: 12%;
+  font-size: 25px;
   font-family: "Gochi Hand", cursive;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -990,11 +1084,10 @@ a:hover {
           align-items: center;
   position: absolute;
   z-index: 2;
-}
-
-.home__action--search {
-  top: 300px;
-  left: 75px;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .home__action--job {
@@ -1005,26 +1098,4 @@ a:hover {
   border-radius: 50%;
   background-color: #FF9802;
   color: #fff;
-}
-
-.home__action--freelance {
-  top: 300px;
-  left: 630px;
-}
-
-.home__signin {
-  height: auto;
-  width: 70px;
-  position: absolute;
-  top: 80.5%;
-  left: 45.8%;
-  z-index: 1;
-}
-
-.home__signin img {
-  background-color: #373538;
-}
-
-.home__signin img:hover {
-  background-color: #FF9802;
 }

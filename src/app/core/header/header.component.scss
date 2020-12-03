@@ -18,7 +18,7 @@
     }
 
     &__logo {
-        right: 0;
+        left: 0;
         top: 20px;
         z-index: 2;
     }
@@ -47,52 +47,45 @@
     }
 }
 
-
 .avatar {
+    color: white;
 
     &__img {
         height: auto;
-        width: 100px;
+        width: 200px;
     }
 
-    &__icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+    &__icon,
+    &__name {
+        position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        color: inherit;
         z-index: 3;
+    }
 
-        i{
-            font-size: 28px;
-            color: white;
-            padding-top: 3px;
+    &__name {
+        width: 90px;
+        bottom: 15px;
+        left: 10px;
+    }
 
+    &__icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        top: 19px;
+        right: 16px;
+
+        i {
+            font-size: 25px;
+            color: inherit;
 
             &:hover {
                 color: $primary-color;
             }
         }
     }
-
-
-    &__menu{
-        display: none;
-    }
-
-    &__menu-triger{
-        display: none;
-        position: absolute;
-        pointer-events: none;
-    }
-
-    &__menu-triger:checked + &__menu {
-        display: flex;
-    }
-
 }

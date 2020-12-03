@@ -22,7 +22,7 @@ import { AppInterceptor } from './app.interceptor';
     HomeComponent,
     LoginComponent,
     NotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

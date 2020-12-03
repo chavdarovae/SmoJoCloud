@@ -1,13 +1,11 @@
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
 import { JobListComponent } from './job-list/job-list.component';
-
-
-
+import { JobMyComponent } from './job-my/job-my.component';
+import { JobNewComponent } from './job-new/job-new.component';
 
 const routes = [
   {
-      path: "jobs",
+      path: 'jobs',
       children: [
         {
           path: 'search',
@@ -19,7 +17,11 @@ const routes = [
         },
         {
           path: 'new',
-          component: HomeComponent
+          component: JobNewComponent
+        },
+        {
+          path: 'my',
+          component: JobMyComponent
         },
       ]
   }

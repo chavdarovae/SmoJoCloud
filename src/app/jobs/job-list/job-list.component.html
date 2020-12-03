@@ -1,79 +1,34 @@
-<div class="container jobs-section">
+<ng-container *ngIf="!jobList">Loading...</ng-container>
+<ng-container *ngIf="jobList">
+    <div class="container jobs-section">
 
-    <form action="" class="form jobs-section__filter">
-        <legend>I search somebody to...</legend>
+        <form class="form form__list jobs-section__filter">
+            <legend>Somebody</legend>
 
-        <label>Location:</label>
-        <select class="form__control" placeholder="Hamburg"></select>
+            <label>in:</label>
+            <select class="form__control">
+                <option value="" disabled>Choose a job location</option>
+                <option *ngFor="let loc of locations" [ngValue]="loc">
+                    {{loc}}
+                </option>
+            </select>
 
-        <label>Type of job:</label>
-        <select class="form__control" placeholder="Gardening"></select>
+            <label>to do:</label>
+            <select class="form__control">
+                <option value="" disabled>Choose a job category</option>
+                <option *ngFor="let cat of categories" [ngValue]="cat.value">
+                    {{cat.title}}
+                </option>
+            </select>
 
-        <label>To be done by:</label>
-        <select class="form__control" placeholder="Tuesday"></select>
-    </form>
+            <input type="button" class="btn" value="Search"/>
+        </form>
 
-    <!-- <div *ngFor="let job of jobList" (click)="jobSelectHandler(cause)">
-        <a href="" class="job">
-            <h4 class="job__title">{{job.title}}</h4>
-            <h5 class="job__location">{{job.loaction}}</h5>
-            <p class="job__description">{{job.description}}</p>
-            <span class="job__timeFrame">{{job.timeFrame}}</span>
-            <span class="job__cost h5-like">{{job.cost}}</span>
-        </a>
-    </div> -->
+        <div *ngFor="let job of jobList" (click)="jobSelectHandler(job)">
 
-    <a routerLink="/jobs/detail" class="job job--pink">
-        <span class="job__title h2-like">Do something special</span>
-        <div class="job__location">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="h3-like"> Hamburg</span>
+            <app-job-card [job]="job"></app-job-card>
+
         </div>
-        <p class="job__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique a? In
-            sequi magnam cum nisi suscipit autem necessitatibus, facilis, accusamus assumenda similique beatae, quaerat
-            provident reprehenderit recusandae ut ullam.</p>
-        <span class="job__timeFrame h3-like">until 13.06</span>
-        <span class="job__cost h5-like h3-like">12.6</span>
-    </a>
 
-    <a routerLink="/jobs/detail" class="job job--yellow">
-        <span class="job__title h2-like">Do something special</span>
-        <div class="job__location">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="h3-like"> Hamburg</span>
-        </div>
-        <p class="job__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique a? In
-            sequi magnam cum nisi suscipit autem necessitatibus, facilis, accusamus assumenda similique beatae, quaerat
-            provident reprehenderit recusandae ut ullam.</p>
-        <span class="job__timeFrame h3-like">until 13.06</span>
-        <span class="job__cost h5-like h3-like">12.6</span>
-    </a>
-
-    <a routerLink="/jobs/detail" class="job job--blue">
-        <span class="job__title h2-like">Do something special</span>
-        <div class="job__location">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="h3-like"> Hamburg</span>
-        </div>
-        <p class="job__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique a? In
-            sequi magnam cum nisi suscipit autem necessitatibus, facilis, accusamus assumenda similique beatae, quaerat
-            provident reprehenderit recusandae ut ullam.</p>
-        <span class="job__timeFrame h3-like">until 13.06</span>
-        <span class="job__cost h5-like h3-like">12.6</span>
-    </a>
-
-    <a routerLink="/jobs/detail" class="job job--green">
-        <span class="job__title h2-like">Do something special</span>
-        <div class="job__location">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="h3-like"> Hamburg</span>
-        </div>
-        <p class="job__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, similique a? In
-            sequi magnam cum nisi suscipit autem necessitatibus, facilis, accusamus assumenda similique beatae, quaerat
-            provident reprehenderit recusandae ut ullam.</p>
-        <span class="job__timeFrame h3-like">until 13.06</span>
-        <span class="job__cost h5-like h3-like">12.6</span>
-    </a>
-
-
-</div>
+    </div>
+</ng-container>

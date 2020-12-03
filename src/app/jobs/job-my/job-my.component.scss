@@ -1,0 +1,28 @@
+@import "../../../styles.scss";
+
+.job-my {
+    background-color: #666;
+    padding: 30px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: start;
+    justify-items: stretch;
+    
+
+    @include for-tablet-landscape-up {
+        grid-template-columns: 300px 300px;
+        column-gap: 200px;
+    }
+
+    &__list {
+
+        &-title {
+            color: #fff;
+            width: 100%;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+    }
+}
