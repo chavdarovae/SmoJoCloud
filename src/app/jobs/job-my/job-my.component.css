@@ -531,22 +531,9 @@ a:hover {
   background-color: #FF9802;
   padding: 30px 15px;
   border-radius: 5px;
-  min-width: 300px;
-  max-width: 500px;
-  width: 400px;
 }
 
-.form__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-bottom: 30px;
-}
-
-.form__line {
+.form--linear {
   min-width: 500px;
   max-width: 1000px;
   width: 1000px;
@@ -557,9 +544,44 @@ a:hover {
   -webkit-box-direction: normal;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
-  margin-bottom: 30px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.form--linear > *:not(:last-child) {
+  margin: 0 20px 0 0;
+}
+
+.form--column {
+  min-width: 300px;
+  max-width: 500px;
+  width: 400px;
+}
+
+.form--column > *:not(:last-child) {
+  margin: 0 0 30px 0;
+}
+
+.form__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form__line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
 }
 
 .form__group {
@@ -570,7 +592,6 @@ a:hover {
   -webkit-box-direction: normal;
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
-  margin-bottom: 30px;
 }
 
 .form__control {
@@ -656,6 +677,25 @@ input.ng-invalid:not(form).ng-touched.password-group {
 .pass-dismatch input.ng-valid.ng-dirty.ng-touched {
   border-left: 5px solid darkred;
   /* red */
+}
+
+.btn {
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  color: #FF9802;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border: none;
+  outline: none;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #363538;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -996,18 +1036,6 @@ input.ng-invalid:not(form).ng-touched.password-group {
   display: grid;
   -ms-grid-rows: 120px 1fr 20px;
       grid-template-rows: 120px 1fr 20px;
-}
-
-.drop-off {
-  position: absolute;
-  z-index: 99;
-  background-color: #000;
-  opacity: 0.2;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
 }
 
 .backdrop {

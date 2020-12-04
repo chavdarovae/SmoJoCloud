@@ -1,6 +1,6 @@
 <div class="container job-new column column--centered">
 
-    <form #jobForm="ngForm" class="form" (ngSubmit)="submitHandler(jobForm.value)">
+    <form #jobForm="ngForm" class="form form--column" (ngSubmit)="submitHandler(jobForm.value)">
 
         <div class="form__line">
             <input #optionSerachInput="ngModel" ngModel name="option" type="radio" id="search" value="search"class="form__control" required>

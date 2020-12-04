@@ -2,30 +2,44 @@
     background-color: $primary-color;
     padding: 30px 15px;
     border-radius: 5px;
-    min-width: 300px;
-    max-width: 500px;
-    width: 400px;
 
-    &__title {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 30px;
-    }
-
-    &__line {
+    &--linear {
         min-width: 500px;
         max-width: 1000px;
         width: 1000px;
         display: flex;
         flex-flow: row nowrap;
-        margin-bottom: 30px;
         justify-content: space-around;
+        align-items: center;
+
+        & > *:not(:last-child) {
+            margin: 0 20px 0 0;
+        }
+    }
+
+    &--column {
+        min-width: 300px;
+        max-width: 500px;
+        width: 400px;
+
+        & > *:not(:last-child) {
+            margin: 0 0 30px 0;
+        }
+    }
+
+    &__title {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__line {
+        display: flex;
+        flex-flow: row nowrap;
     }
 
     &__group {
         display: flex;
         flex-flow: column wrap;
-        margin-bottom: 30px;
     }
 
     &__control {

@@ -20,15 +20,15 @@
                 </a>
                 <div *ngIf="showUserMenu" class="backdrop" (click)="showUserMenu=!showUserMenu"></div>
                 <ul *ngIf="showUserMenu" class="avatar__menu menu animations-fancy-list">
-                    <li class="menu__item"><a routerLink="/jobs/new" class="menu__item-link">Post a new AD</a>
+                    <li class="menu__item"><a routerLink="/jobs/new" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Post a new AD</a>
                     </li>
-                    <li class="menu__item"><a routerLink="/jobs/my" class="menu__item-link">My ADs</a>
+                    <li class="menu__item"><a routerLink="/jobs/my" class="menu__item-link" (click)="showUserMenu=!showUserMenu">My ADs</a>
                     </li>
-                    <li class="menu__item"><a routerLink="/user/profile" class="menu__item-link">User
+                    <li class="menu__item"><a routerLink="/user/profile" class="menu__item-link" (click)="showUserMenu=!showUserMenu">User
                             profile</a>
                     </li>
                    
-                    <li class="menu__item"><a (click)="logout()" class="menu__item-link">Logout</a></li>
+                    <li class="menu__item"><a (click)="logout()" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Logout</a></li>
                 </ul>
             </ng-container>
             <div class="avatar__img">

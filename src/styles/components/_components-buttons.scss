@@ -1,0 +1,16 @@
+.btn {
+    background-color: #fff;
+    box-shadow: $therdery-shadow;
+    border-radius: $primary-rad;
+    color: $primary-color;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: none;
+    outline: none;
+
+    &:hover {
+        color: #fff;
+        background-color: $secondary-color;
+        box-shadow: $primary-shadow;
+    }
+}

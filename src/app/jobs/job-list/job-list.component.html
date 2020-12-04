@@ -2,32 +2,38 @@
 <ng-container *ngIf="jobList">
     <div class="container jobs-section">
 
-        <form class="form form__list jobs-section__filter">
-            <legend>Somebody</legend>
+        <form #filterForm="ngForm" class="form form--linear jobs-section__filter">
+            <div class="form__line">
+                <label>In </label>
+                <select #locationSelect='ngModel' ngModel name="location" class="form__control">
+                    <option value="" checked>Choose a job location</option>
+                    <option *ngFor="let loc of locations" [ngValue]="loc">
+                        {{loc}}
+                    </option>
+                </select>
+            </div>
 
-            <label>in:</label>
-            <select class="form__control">
-                <option value="" disabled>Choose a job location</option>
-                <option *ngFor="let loc of locations" [ngValue]="loc">
-                    {{loc}}
-                </option>
-            </select>
+            <legend *ngIf="searchMode">search for somebody</legend>
+            <legend *ngIf="!searchMode">somebody offers</legend>
 
-            <label>to do:</label>
-            <select class="form__control">
-                <option value="" disabled>Choose a job category</option>
-                <option *ngFor="let cat of categories" [ngValue]="cat.value">
-                    {{cat.title}}
-                </option>
-            </select>
+            <div div class="form__line">
+                <label>to do </label>
+                <select #categorySelect='ngModel' ngModel name="category" class="form__control">
+                    <option value="" checked>Choose a job category</option>
+                    <option *ngFor="let cat of categories" [ngValue]="cat.value">
+                        {{cat.title}}
+                    </option>
+                </select>
+            </div>
 
-            <input type="button" class="btn" value="Search"/>
+            <input  *ngIf="searchMode" type="button" class="btn" value="Filter" (click)="filter(filterForm.value, 'search')"/>
+            <input  *ngIf="!searchMode" type="button" class="btn" value="Filter" (click)="filter(filterForm.value, 'offer')"/>
         </form>
 
+        <!-- {{filterForm.value | json}} -->
+
         <div *ngFor="let job of jobList" (click)="jobSelectHandler(job)">
-
             <app-job-card [job]="job"></app-job-card>
-
         </div>
 
     </div>

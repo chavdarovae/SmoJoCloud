@@ -64,4 +64,18 @@ export class JobService {
       console.log(res);
     }))
   }
+
+  getFilteredJobList( location:string, category:string ) {
+    const url = `data/jobList?where=location%20%3D%20'${location}'and%20category%20%3D%20'${category}'&sortBy=created%20desc`
+    return this.http.get<[IJob]>(url).pipe(tap((res)=>{
+      console.log(res);
+    }))
+  }
+
+  getFilteredFreelanceList( location:string, category:string ) {
+    const url = `data/freelanceList?where=location%20%3D%20'${location}'and%20category%20%3D%20'${category}'&sortBy=created%20desc`
+    return this.http.get<[IJob]>(url).pipe(tap((res)=>{
+      console.log(res);
+    }))
+  }
 }
