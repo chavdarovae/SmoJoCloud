@@ -23,6 +23,7 @@
 @import "./styles/components/_components-menu.scss";
 @import "./styles/components/_components-notifications.scss";
 @import "./styles/components/_components-buttons.scss";
+@import "./styles/components/_components-icons.scss";
 
 
 @import "./styles/objects/_objects-containers.scss";
@@ -53,3 +54,6 @@
 }
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

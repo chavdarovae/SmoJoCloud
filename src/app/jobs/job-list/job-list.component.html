@@ -1,40 +1,43 @@
-<ng-container *ngIf="!jobList">Loading...</ng-container>
-<ng-container *ngIf="jobList">
-    <div class="container jobs-section">
+<div class="container jobs-section">
 
-        <form #filterForm="ngForm" class="form form--linear jobs-section__filter">
-            <div class="form__line">
-                <label>In </label>
-                <select #locationSelect='ngModel' ngModel name="location" class="form__control">
-                    <option value="" checked>Choose a job location</option>
-                    <option *ngFor="let loc of locations" [ngValue]="loc">
-                        {{loc}}
-                    </option>
-                </select>
-            </div>
+    <form #filterForm="ngForm" class="form form--linear jobs-section__filter">
 
-            <legend *ngIf="searchMode">search for somebody</legend>
-            <legend *ngIf="!searchMode">somebody offers</legend>
-
-            <div div class="form__line">
-                <label>to do </label>
-                <select #categorySelect='ngModel' ngModel name="category" class="form__control">
-                    <option value="" checked>Choose a job category</option>
-                    <option *ngFor="let cat of categories" [ngValue]="cat.value">
-                        {{cat.title}}
-                    </option>
-                </select>
-            </div>
-
-            <input  *ngIf="searchMode" type="button" class="btn" value="Filter" (click)="filter(filterForm.value, 'search')"/>
-            <input  *ngIf="!searchMode" type="button" class="btn" value="Filter" (click)="filter(filterForm.value, 'offer')"/>
-        </form>
-
-        <!-- {{filterForm.value | json}} -->
-
-        <div *ngFor="let job of jobList" (click)="jobSelectHandler(job)">
-            <app-job-card [job]="job"></app-job-card>
+        <div div class="form__line">
+            <label *ngIf="searchMode">Who searches for somebody to do </label>
+            <label *ngIf="!searchMode">Who offers to do </label>
+            <select #categorySelect='ngModel' ngModel name="category" class="form__control" required>
+                <option value="" checked>Choose a job category</option>
+                <option *ngFor="let cat of categories" [ngValue]="cat.value">
+                    {{cat.title}}
+                </option>
+            </select>
         </div>
 
-    </div>
-</ng-container>
+        <div class="form__line">
+            <label>in </label>
+            <select #locationSelect='ngModel' ngModel name="location" class="form__control" required>
+                <option value="" checked>Choose a job location</option>
+                <option *ngFor="let loc of locations" [ngValue]="loc">
+                    {{loc}}
+                </option>
+            </select>
+        </div>
+
+        <input *ngIf="searchMode" type="button" class="btn" value="Filter"
+            [disabled]="categorySelect.errors?.required && locationSelect.errors?.required"
+            (click)="filter(filterForm.value, 'search')" />
+        <input *ngIf="!searchMode" type="button" class="btn" value="Filter"
+            [disabled]="categorySelect.errors?.required && locationSelect.errors?.required"
+            (click)="filter(filterForm.value, 'offer')" />
+    </form>
+
+    <!-- {{filterForm.value | json}} -->
+    <ng-container *ngIf="!(jobList$ | async)">Loading...</ng-container>
+    <ng-container *ngIf="(jobList$ | async)">
+
+        <div *ngFor="let job of  (jobList$ | async)" (click)="jobSelectHandler(job)">
+            <app-job-card [job]="job"></app-job-card>
+        </div>
+        
+    </ng-container>
+</div>

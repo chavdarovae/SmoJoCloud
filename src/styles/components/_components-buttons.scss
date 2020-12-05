@@ -13,4 +13,9 @@
         background-color: $secondary-color;
         box-shadow: $primary-shadow;
     }
+
+    &:disabled {
+        color: lightgray;
+        pointer-events: none;
+    }
 }

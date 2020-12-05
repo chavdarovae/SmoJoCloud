@@ -14,7 +14,6 @@ export class JobListComponent implements OnInit {
   jobList$: Observable<[IJob]>;
   filteredJobList$: Observable<[IJob]>;
 
-  jobList: [IJob];
   searchMode: boolean = true;
   categories = this.jobService.categories;
   locations = this.jobService.locations;
@@ -30,34 +29,43 @@ export class JobListComponent implements OnInit {
 
   ngOnInit(): void {
     const url = this.router.routerState.snapshot.url;
+    let collection = 'jobList';
 
-    if (url.includes('search')) {
-      this.jobList$ = this.jobService.getJobList();
-    } else if (url.includes('offer')) {
+    if (url.includes('offer')) {
       this.searchMode = false;
-      console.log(this.searchMode);
-      
-      this.jobList$ = this.jobService.getFreelanceList();
+      collection = 'freelanceList'
     }
+    this.jobList$ = this.jobService.getJobList(collection);
 
-    this.jobList$.subscribe((res) => {
-      this.jobList = res;
-    }, console.error);
+
+    // this.jobList$.subscribe((res) => {
+    //   this.jobList = res;
+    // }, console.error);
 
   }
 
   jobSelectHandler() { }
 
   filter(input: { location: string, category: string }, mode: string) {
-    if(mode==='search'){
-      this.filteredJobList$ = this.jobService.getFilteredJobList(input.location, input.category);
-    }else if(mode==='offer'){
-      this.filteredJobList$ = this.jobService.getFilteredFreelanceList(input.location, input.category);
+    
+    const url = this.returnFilterUrl(input.location, input.category, mode);
+
+    this.jobList$ = this.jobService.getFilteredJobList(url);
+  }
+
+  returnFilterUrl(location: string, category: string, mode: string) {
+    let collection = 'jobList';
+    if (mode === 'offer') {
+      collection = 'freelanceList';
     }
 
-    this.filteredJobList$.subscribe((res) => {
-      this.jobList = res;
-    }, console.error);
+    if (location && category) {
+      return `data/${collection}?where=location%20%3D%20'${location}'and%20category%20%3D%20'${category}'&sortBy=created%20desc`
+    } else if (!location) {
+      return `data/${collection}?where=category%20%3D%20'${category}'&sortBy=created%20desc`
+    } else if (!category) {
+      return `data/${collection}?where=location%20%3D%20'${location}'&sortBy=created%20desc`
+    }
   }
 
 }

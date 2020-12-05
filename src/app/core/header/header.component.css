@@ -551,6 +551,10 @@ a:hover {
           align-items: center;
 }
 
+.form--linear label {
+  white-space: pre;
+}
+
 .form--linear > *:not(:last-child) {
   margin: 0 20px 0 0;
 }
@@ -582,6 +586,9 @@ a:hover {
   -webkit-box-direction: normal;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .form__group {
@@ -696,6 +703,28 @@ input.ng-invalid:not(form).ng-touched.password-group {
   background-color: #363538;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:disabled {
+  color: lightgray;
+  pointer-events: none;
+}
+
+.icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.icon svg {
+  fill: #585858;
+  font-size: inherit;
 }
 
 .container {
@@ -1046,6 +1075,15 @@ input.ng-invalid:not(form).ng-touched.password-group {
   bottom: 0;
   background: black;
   opacity: 0.2;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .header {

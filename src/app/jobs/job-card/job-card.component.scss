@@ -81,14 +81,14 @@
         grid-column: -1 / 1;
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
         transform: rotate(5deg);
 
         span {
             font-size: 24px;
         }
 
-        i {
-            font-size: 24px;
+        .icon {
             margin-right: 5px;
         }
     }

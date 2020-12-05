@@ -12,6 +12,10 @@
         justify-content: space-around;
         align-items: center;
 
+        label {
+            white-space: pre;
+        }
+
         & > *:not(:last-child) {
             margin: 0 20px 0 0;
         }
@@ -35,6 +39,7 @@
     &__line {
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
     }
 
     &__group {
