@@ -533,6 +533,11 @@ a:hover {
   border-radius: 5px;
 }
 
+.form--column {
+  min-width: 500px;
+  max-width: 1000px;
+}
+
 .form--linear {
   min-width: 500px;
   max-width: 1000px;
@@ -696,6 +701,7 @@ input.ng-invalid:not(form).ng-touched.password-group {
   padding: 5px 15px;
   border: none;
   outline: none;
+  line-height: 1;
 }
 
 .btn:hover {
@@ -1077,13 +1083,8 @@ input.ng-invalid:not(form).ng-touched.password-group {
   opacity: 0.2;
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.spinner-wrap {
+  grid-column: 1 / -1;
 }
 
 .header {

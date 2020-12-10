@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
+import { LoadingService } from 'src/app/shared/loading.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -12,60 +14,43 @@ import { JobService } from '../job.service';
 export class JobListComponent implements OnInit {
 
   jobList$: Observable<[IJob]>;
-  filteredJobList$: Observable<[IJob]>;
+  locationSet$: Observable<String[]>;
+  categorySet$: Observable<String[]>;
 
-  searchMode: boolean = true;
-  categories = this.jobService.categories;
-  locations = this.jobService.locations;
-
-  get jobListIsAvailable() {
-    return !!this.jobList;
+  get searchMode() {
+    return this.jobService.searchMode;
   }
 
   constructor(
     private jobService: JobService,
-    private router: Router
-  ) { }
+    private activateRoute: ActivatedRoute,
+    private loadingService: LoadingService
+  ) {
+    this.jobService.searchMode = 'search' === this.activateRoute.snapshot.data.mode;
+  }
 
   ngOnInit(): void {
-    const url = this.router.routerState.snapshot.url;
-    let collection = 'jobList';
+    this.loadingService.loadingOn();
 
-    if (url.includes('offer')) {
-      this.searchMode = false;
-      collection = 'freelanceList'
-    }
-    this.jobList$ = this.jobService.getJobList(collection);
+    this.jobList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
+            .pipe(
+              finalize(()=>this.loadingService.loadingOff())
+            );
 
+  
+    // this.loadingService.showLoaderUntilCompleted( this.jobList$ );
 
-    // this.jobList$.subscribe((res) => {
-    //   this.jobList = res;
-    // }, console.error);
+    this.locationSet$ = this.jobList$.pipe(
+      map(jobs=>Array.from(new Set(jobs.map(job=>job.location))).sort())
+    )
 
+    this.categorySet$ = this.jobList$.pipe(
+      map(jobs=>Array.from(new Set(jobs.map(job=>job.category))).sort())
+    )
   }
 
-  jobSelectHandler() { }
-
-  filter(input: { location: string, category: string }, mode: string) {
-    
-    const url = this.returnFilterUrl(input.location, input.category, mode);
-
-    this.jobList$ = this.jobService.getFilteredJobList(url);
+  filter(input: { location: string, category: string }) {
+    const collection = this.activateRoute.snapshot.data.collection;
+    this.jobList$ = this.jobService.getFilteredJobList(collection, input.location, input.category);
   }
-
-  returnFilterUrl(location: string, category: string, mode: string) {
-    let collection = 'jobList';
-    if (mode === 'offer') {
-      collection = 'freelanceList';
-    }
-
-    if (location && category) {
-      return `data/${collection}?where=location%20%3D%20'${location}'and%20category%20%3D%20'${category}'&sortBy=created%20desc`
-    } else if (!location) {
-      return `data/${collection}?where=category%20%3D%20'${category}'&sortBy=created%20desc`
-    } else if (!category) {
-      return `data/${collection}?where=location%20%3D%20'${location}'&sortBy=created%20desc`
-    }
-  }
-
 }

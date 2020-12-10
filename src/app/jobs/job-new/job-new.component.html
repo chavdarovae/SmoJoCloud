@@ -38,8 +38,8 @@
             <label for="category">Select job category</label>
             <select #categorySelect='ngModel' ngModel name="category" id="category" class="form__control" required>
                 <option value="" disabled>Choose a job category</option>
-                <option *ngFor="let cat of categories" [ngValue]="cat.value">
-                    {{ cat.title }}
+                <option *ngFor="let cat of categories" [ngValue]="cat">
+                    {{cat}}
                 </option>
             </select>
             <!-- notification-message category -->

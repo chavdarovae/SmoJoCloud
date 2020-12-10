@@ -1,4 +1,4 @@
-<article *ngIf="job" class="job job--{{job.color}}">
+<a *ngIf="job" [routerLink]="['/jobs','details', job.objectId]" class="job job--{{job.color}}">
     <div class="job__pin"></div>
     <span class="job__title h2-like">{{job.job}}</span>
     <span class="job__title h2-like hidden">{{job.category}}</span>
@@ -15,4 +15,4 @@
         provident reprehenderit recusandae ut ullam.</p>
     <span class="job__timeFrame h3-like">until 13.06</span>
     <span class="job__cost h5-like h3-like">12.6</span>
-</article>
+</a>

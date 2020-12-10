@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
+import { LoadingService } from 'src/app/shared/loading.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -11,32 +13,41 @@ import { JobService } from '../job.service';
 })
 export class JobNewComponent {
 
-  categories = this.jobService.categories;
+  categories = [
+    'IT&Hardware',
+    'Construction&Refurbrishment',
+    'Gardening&Irrigation',
+    'Cleaning&Housekeeping'
+  ];
 
   constructor(
     private jobService: JobService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) { }
 
   submitHandler(jobToPost: IJob) {
 
     switch (jobToPost.category) {
-      case 'it': jobToPost.color = 'pink'; break;
-      case 'construction': jobToPost.color = 'yellow'; break;
-      case 'gardening': jobToPost.color = 'green'; break;
-      case 'cleaning': jobToPost.color = 'blue'; break;
-      default: jobToPost.color = 'pink'; break;
+      case 'IT&Hardware': jobToPost.color = 'pink'; break;
+      case 'Construction&Refurbrishment': jobToPost.color = 'yellow'; break;
+      case 'Gardening&Irrigation': jobToPost.color = 'green'; break;
+      case 'Cleaning&Housekeeping': jobToPost.color = 'blue'; break;
+      default: jobToPost.color = 'tomato'; break;
     }
 
-    let jobPost$: Observable<IJob>;
+    let collection = 'jobList'
 
-    if (jobToPost.option === 'search') {
-      jobPost$ = this.jobService.postJob(jobToPost)
-    } else if (jobToPost.option === 'offer') {
-      jobPost$ = this.jobService.postFreelance(jobToPost)
+    if (jobToPost.option === 'offer') {
+      collection = 'freelanceList'
     }
-
-    jobPost$.subscribe(() => {
+    
+    this.loadingService.loadingOn();
+    this.jobService.postJob(jobToPost, collection)
+        .pipe(
+          finalize(()=>this.loadingService.loadingOff())
+        )
+        .subscribe(() => {
       this.router.navigate(['']);
     }, console.error);
   }

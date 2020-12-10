@@ -1,8 +1,9 @@
-<ng-container *ngIf="!isReady">Loading...</ng-container>
-<ng-container *ngIf="isReady">
+<!-- <app-spinner *ngIf="!isReady" class="spinner-wrap"></app-spinner> -->
+<ng-container *ngIf="true">
   <app-header></app-header>
 
   <div class="main">
+    <app-loading></app-loading>
     <router-outlet></router-outlet>
   </div>
 

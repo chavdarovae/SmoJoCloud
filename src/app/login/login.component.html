@@ -1,6 +1,6 @@
 <div class="container login column column--centered">
 
-    <form #loginForm="ngForm" class="form" (ngSubmit)="submitHandler(loginForm.value)">
+    <form #loginForm="ngForm" class="form  form--column" (ngSubmit)="submitHandler(loginForm.value)">
         
         <div class="form__group">
             <label for="email">Email address</label>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="form__btn-line">
-            <button [disabled]="loginForm.invalid" class="btn">Login</button>
+            <button [disabled]="loginForm.invalid" class="btn btn--primary">Login</button>
         </div>
     </form>
 

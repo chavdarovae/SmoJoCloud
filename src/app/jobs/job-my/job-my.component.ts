@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
+import { LoadingService } from 'src/app/shared/loading.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -7,27 +10,26 @@ import { JobService } from '../job.service';
   templateUrl: './job-my.component.html',
   styleUrls: ['./job-my.component.scss']
 })
-export class JobMyComponent implements OnInit {
+export class JobMyComponent {
 
-  jobList: [IJob];
-  freelanceList: [IJob];
-
-  get areListsAvailable ():Boolean {
-    return (!!this.jobList) || (!!this.freelanceList)
-  }
+  jobList$: Observable<[IJob]>;
+  freelanceList$: Observable<[IJob]>;
 
   constructor(
-    private jobService: JobService
-  ) { }
+    private jobService: JobService,
+    private loadingService: LoadingService
+  ) { 
+    this.loadLists();
+  }
 
-  ngOnInit(): void {
-    this.jobService.getJobListByUserId().subscribe((res) => {
-      this.jobList = res;
-    }, console.error);
+  loadLists(){
+    this.loadingService.loadingOn();
+    this.jobList$ = this.jobService.getJobListByUserId('jobList')
+        .pipe(
+          finalize(()=> this.loadingService.loadingOff())
+        )
 
-    this.jobService.getFreelanceListByUserId().subscribe((res) => {
-      this.freelanceList = res;
-    }, console.error);
+    this.freelanceList$ = this.jobService.getJobListByUserId('freelanceList');
   }
 
 }

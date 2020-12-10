@@ -1,6 +1,6 @@
 <div class="container register column column--centered">
   
-    <form #registerForm="ngForm"  class="form" (ngSubmit)="submitHandler(registerForm.value)">
+    <form #registerForm="ngForm"  class="form form--column" (ngSubmit)="submitHandler(registerForm.value)">
 
         <div class="form__group">
             <label for="email">Email address</label>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form__btn-line">
-            <button [disabled]="registerForm.invalid" class="btn btn-primary">Register</button>
+            <button [disabled]="registerForm.invalid" class="btn btn--primary">Register</button>
         </div>
     </form>
     

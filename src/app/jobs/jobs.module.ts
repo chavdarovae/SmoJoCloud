@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { JobCardComponent } from './job-card/job-card.component';
 import { JobMyComponent } from './job-my/job-my.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,20 +17,21 @@ import { JobDetailsComponent } from './job-details/job-details.component';
     JobNewComponent,
     JobCardComponent,
     JobMyComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
   ],
   imports: [
     CommonModule,
     JobRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     JobListComponent, 
     JobNewComponent,
     JobCardComponent,
     JobMyComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
   ],
 
 })

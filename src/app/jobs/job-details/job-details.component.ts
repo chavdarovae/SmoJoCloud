@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IJob } from 'src/app/shared/interfaces/job.interface';
+import { JobService } from '../job.service';
 
 @Component({
   selector: 'app-job-details',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobDetailsComponent implements OnInit {
 
-  constructor() { }
+  selectedJob$: Observable <IJob>
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private jobService: JobService
+  ) { }
 
   ngOnInit(): void {
+    this.selectedJob$ = this.jobService.getJobById(this.jobService.searchMode?'jobList':'freelanceList',this.activatedRoute.snapshot.params.id)
   }
 
 }

@@ -3,6 +3,11 @@
     padding: 30px 15px;
     border-radius: 5px;
 
+    &--column {
+        min-width: 500px;
+        max-width: 1000px;
+    }
+
     &--linear {
         min-width: 500px;
         max-width: 1000px;
