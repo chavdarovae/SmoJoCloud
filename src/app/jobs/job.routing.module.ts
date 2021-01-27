@@ -13,7 +13,7 @@ const routes = [
         component: JobListComponent,
         data: {
           collection: 'jobList',
-          mode: 'search'
+          mode: 'search',
         }
       },
       {
@@ -21,7 +21,7 @@ const routes = [
         component: JobListComponent,
         data: {
           collection: 'freelanceList',
-          mode: 'freelance'
+          mode: 'freelance',
         } 
       },
       {
@@ -43,7 +43,6 @@ const routes = [
         component: JobDetailsComponent,
         data: {
           isLogged: true,
-          collection: 'jobList',
         }
       },
     ]

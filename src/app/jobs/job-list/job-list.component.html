@@ -2,7 +2,7 @@
 
     <form #filterForm="ngForm" class="form form--linear jobs-section__filter">
 
-        <div div class="form__line">
+        <div class="form__line">
             <label *ngIf="searchMode">Searches for somebody to do </label>
             <label *ngIf="!searchMode">Offers to do </label>
             <select #categorySelect='ngModel' ngModel name="category" class="form__control" required>
@@ -23,9 +23,9 @@
             </select>
         </div>
 
-        <input type="button" class="btn" value="Filter"
+        <input type="button" class="btn" value="Clear Filter"
             [disabled]="categorySelect.errors?.required && locationSelect.errors?.required"
-            (click)="filter(filterForm.value)" />
+            (click)="clearFilter(filterForm)" />
     </form>
 
     <ng-container *ngIf="(jobList$ | async)">

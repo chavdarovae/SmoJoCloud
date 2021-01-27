@@ -9,6 +9,7 @@ import { JobCardComponent } from './job-card/job-card.component';
 import { JobMyComponent } from './job-my/job-my.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { SharedModule } from '../shared/shared.module';
+import { CanShowDetailsPipe } from './can-show-details.pipe';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     JobCardComponent,
     JobMyComponent,
     JobDetailsComponent,
+    CanShowDetailsPipe
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { SharedModule } from '../shared/shared.module';
     JobCardComponent,
     JobMyComponent,
     JobDetailsComponent,
+    CanShowDetailsPipe
   ],
 
 })

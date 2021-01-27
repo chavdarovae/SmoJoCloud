@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
 
 @Component({
@@ -9,10 +9,17 @@ import { IJob } from 'src/app/shared/interfaces/job.interface';
 export class JobCardComponent implements OnInit {
   
   @Input() job: IJob;
+  @Output() changeModeEvent: EventEmitter<IJob> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectJobHandler(job: IJob){
+    console.log('selektiram');
+    
+    this.changeModeEvent.emit(job);
   }
 
 }

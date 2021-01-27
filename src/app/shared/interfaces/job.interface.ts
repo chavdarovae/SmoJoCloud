@@ -1,4 +1,5 @@
 export interface IJob {
+    ownerId: string,
     objectId: string,
     option: string,
     job: string,

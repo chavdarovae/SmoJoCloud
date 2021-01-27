@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { concat, Observable } from 'rxjs';
+import { concatMap, finalize, map } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { JobService } from '../job.service';
@@ -17,6 +18,10 @@ export class JobListComponent implements OnInit {
   locationSet$: Observable<String[]>;
   categorySet$: Observable<String[]>;
 
+  @ViewChild('filterForm', { read: NgForm })
+  form: any;
+  selectedValue: string;
+
   get searchMode() {
     return this.jobService.searchMode;
   }
@@ -29,16 +34,10 @@ export class JobListComponent implements OnInit {
     this.jobService.searchMode = 'search' === this.activateRoute.snapshot.data.mode;
   }
 
-  ngOnInit(): void {
-    this.loadingService.loadingOn();
-
-    this.jobList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
-            .pipe(
-              finalize(()=>this.loadingService.loadingOff())
-            );
-
-  
-    // this.loadingService.showLoaderUntilCompleted( this.jobList$ );
+  ngOnInit() {
+    const loadList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection);
+            
+    this.jobList$ =this.loadingService.showLoaderUntilCompleted( loadList$ );
 
     this.locationSet$ = this.jobList$.pipe(
       map(jobs=>Array.from(new Set(jobs.map(job=>job.location))).sort())
@@ -47,10 +46,20 @@ export class JobListComponent implements OnInit {
     this.categorySet$ = this.jobList$.pipe(
       map(jobs=>Array.from(new Set(jobs.map(job=>job.category))).sort())
     )
+
+    concat(this.locationSet$,this.categorySet$).pipe(
+      concatMap(()=>this.form.valueChanges)).subscribe(
+        ()=>this.filter(this.form.value)
+      );
+    
   }
 
   filter(input: { location: string, category: string }) {
     const collection = this.activateRoute.snapshot.data.collection;
     this.jobList$ = this.jobService.getFilteredJobList(collection, input.location, input.category);
+  }
+
+  clearFilter(){
+    this.form.resetForm();
   }
 }

@@ -3,15 +3,16 @@
     <div class="job-my container">
         <div class="job-my__list column--centered">
             <h2 class="job-my__list-title">I search for somebody to...</h2>
-            <div *ngFor="let job of (jobList$ | async)">
-                <app-job-card [job]="job"></app-job-card>
-            </div>
+            <ng-container *ngFor="let job of (jobList$ | async)">
+                <app-job-card [job]="job" (changeModeEvent)="turnOnSerchMode($event)"></app-job-card>
+            </ng-container>
         </div>
+
         <div class="job-my__list column--centered">
             <h2 class="job-my__list-title">I offer to...</h2>
-            <div *ngFor="let job of (freelanceList$ | async)">
-                <app-job-card [job]="job"></app-job-card>
-            </div>
+            <ng-container *ngFor="let job of (freelanceList$ | async)">
+                <app-job-card [job]="job" (changeModeEvent)="turnOffSerchMode($event)"></app-job-card>
+            </ng-container>
         </div>
     </div>
 </ng-container>

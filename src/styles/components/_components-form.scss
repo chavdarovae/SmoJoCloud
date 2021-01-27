@@ -3,11 +3,6 @@
     padding: 30px 15px;
     border-radius: 5px;
 
-    &--column {
-        min-width: 500px;
-        max-width: 1000px;
-    }
-
     &--linear {
         min-width: 500px;
         max-width: 1000px;
@@ -27,9 +22,8 @@
     }
 
     &--column {
-        min-width: 300px;
-        max-width: 500px;
-        width: 400px;
+        // min-width: 500px;
+        width: 90%;
 
         & > *:not(:last-child) {
             margin: 0 0 30px 0;

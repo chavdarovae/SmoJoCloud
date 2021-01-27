@@ -442,7 +442,7 @@ body, * {
 }
 
 p {
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Reenie Beanie', cursive;
   line-height: 24px;
 }
@@ -467,34 +467,28 @@ h6,
 
 h1,
 .h1-like {
-  font-size: 24px;
-  line-height: 26px;
+  font-size: 28px;
+  line-height: 31px;
 }
 
 h2,
 .h2-like {
-  font-size: 22px;
-  line-height: 24px;
+  font-size: 26px;
+  line-height: 28px;
 }
 
 h3,
 .h3-like {
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 24px;
+  line-height: 26px;
 }
 
 h4,
 .h4-like,
 .h4-like-title {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 900;
-}
-
-h5,
-.h5-like {
-  font-size: 16px;
-  line-height: 18px;
 }
 
 ol[class],
@@ -533,11 +527,6 @@ a:hover {
   border-radius: 5px;
 }
 
-.form--column {
-  min-width: 500px;
-  max-width: 1000px;
-}
-
 .form--linear {
   min-width: 500px;
   max-width: 1000px;
@@ -565,9 +554,7 @@ a:hover {
 }
 
 .form--column {
-  min-width: 300px;
-  max-width: 500px;
-  width: 400px;
+  width: 90%;
 }
 
 .form--column > *:not(:last-child) {
@@ -726,11 +713,17 @@ input.ng-invalid:not(form).ng-touched.password-group {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .icon svg {
   fill: #585858;
   font-size: inherit;
+}
+
+.icon:hover svg {
+  fill: #FF9802;
 }
 
 .container {
@@ -1107,6 +1100,7 @@ input.ng-invalid:not(form).ng-touched.password-group {
       grid-template-columns: 200px 60px;
   -ms-grid-rows: 25px 1fr 70px 50px;
       grid-template-rows: 25px 1fr 70px 50px;
+      grid-template-areas: "pin pin" "title title" "location location" "timeFrame cost";
   row-gap: 10px;
   -webkit-column-gap: 10px;
           column-gap: 10px;
@@ -1117,7 +1111,6 @@ input.ng-invalid:not(form).ng-touched.password-group {
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
-      grid-template-areas: "pin pin" "title title" "location location" "timeFrame cost" "timeFrame cost";
 }
 
 .job:hover {
@@ -1166,6 +1159,12 @@ input.ng-invalid:not(form).ng-touched.password-group {
   background-image: radial-gradient(tomato 70%, #78FC65);
 }
 
+.job--std {
+  background-color: #998799;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
 .job__pin {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
@@ -1205,29 +1204,22 @@ input.ng-invalid:not(form).ng-touched.password-group {
           transform: rotate(5deg);
 }
 
-.job__location span {
-  font-size: 24px;
-}
-
 .job__location .icon {
   margin-right: 5px;
 }
 
 .job__description {
   grid-area: description;
-  display: none;
 }
 
 .job__timeFrame {
   -ms-grid-row: 4;
-  -ms-grid-row-span: 2;
   -ms-grid-column: 1;
   grid-area: timeFrame;
 }
 
 .job__cost {
   -ms-grid-row: 4;
-  -ms-grid-row-span: 2;
   -ms-grid-column: 2;
   grid-area: cost;
   text-decoration: underline;
@@ -1243,4 +1235,12 @@ input.ng-invalid:not(form).ng-touched.password-group {
   content: "$";
   display: inline-block;
   margin-left: 3px;
+}
+
+.job__owner {
+  grid-area: owner;
+}
+
+.job__contact {
+  grid-area: contact;
 }

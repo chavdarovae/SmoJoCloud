@@ -1,1 +1,52 @@
-<app-job-card [job]="(selectedJob$ | async)[0]"></app-job-card>
+<app-job-card [job]="(selectedJob$ | async)"></app-job-card>
+
+<div *ngIf="(selectedJob$ | async)" class="job-info">
+    <p class="job-info__description">Further info: {{(selectedJob$ | async).description}}
+    </p>
+    <span class="job-info__owner h5-like h3-like">Nikita@mail.com</span>
+    <span class="icon job__contact" (click)="isMsgBlockVisible=!isMsgBlockVisible">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+            focusable="false" width="1em" height="1em"
+            style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+            preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+            <path
+                d="M5 2c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3.5l3.5 4l3.5-4H19c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2H5zm4.302 11.987h-1.8v-1.799l4.978-4.97l1.798 1.799l-4.976 4.97zm5.823-5.817l-1.798-1.799L14.698 5l1.8 1.799l-1.373 1.371z" />
+        </svg>
+    </span>
+
+    <form #messageForm="ngForm" *ngIf="isMsgBlockVisible" (ngSubmit)="submitHandler(messageForm.value)"
+        class="job-info__form form--column">
+        <div class="form__group hidden">
+            <label for="jobOwner">To:</label>
+            <input name="jobOwner" type="text" id="jobOwner" [ngModel]="(selectedJob$ | async).ownerId" required>
+        </div>
+        <div class="form__group hidden">
+            <label for="jobTitle">Subject:</label>
+            <input name="jobId" type="text" id="jobId" [ngModel]="(selectedJob$ | async).objectId" required>
+        </div>
+        <div class="form__group">
+            <label for="jobMessage">Message:</label>
+            <textarea #jobMessageArea ngModel name="jobMessage" type="text" id="jobMessage" required></textarea>
+
+            <!-- notification-message job-message -->
+            <ng-template #jobMessageError>
+                <div class="notification-message notification-message--error">
+                    <span *ngIf="jobMessageArea.errors?.required">Please, input a valid messsage!</span>
+                </div>
+            </ng-template>
+            <ng-template #validationConfirmation let-case='caseIdentifier'>
+                <div class="notification-message notification-message--ok">{{case}} validated!</div>
+            </ng-template>
+            <ng-container *ngIf="jobMessageArea.touched">
+                <ng-container
+                    *ngTemplateOutlet="jobMessageArea.invalid ? jobMessageError : validationConfirmation; context: {caseIdentifier: 'Job message input'}">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="form__btn-line">
+            <button class="btn" [disabled]="messageForm.invalid">Send</button>
+        </div>
+    </form>
+
+</div>

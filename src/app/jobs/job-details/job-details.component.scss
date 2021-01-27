@@ -1,0 +1,44 @@
+@import "../../../styles.scss";
+
+.job-info {
+    width: $sticky-note-dim;
+    box-shadow: $sticky-note-shadow;
+    padding: 10px 15px 10px 15px;
+    overflow: hidden;
+    transform-origin: top center;
+    display: grid;
+    grid-template-columns: 200px 60px;
+    grid-template-rows: min-content 100px 1fr;
+    grid-template-areas:
+    "description description"
+    "owner contact"
+    "message message";
+
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(153, 135, 153);
+
+    &__description {
+        grid-area: description;
+    }
+
+    &__owner {
+        grid-area: owner;
+    }
+
+    &__contact {
+        grid-area: contact;
+    }
+
+    &__form {
+        grid-area: message;
+        width: 100%;
+
+        textarea {
+            height: 10em;
+        }
+    }
+}

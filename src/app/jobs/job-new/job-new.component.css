@@ -442,7 +442,7 @@ body, * {
 }
 
 p {
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Reenie Beanie', cursive;
   line-height: 24px;
 }
@@ -467,34 +467,28 @@ h6,
 
 h1,
 .h1-like {
-  font-size: 24px;
-  line-height: 26px;
+  font-size: 28px;
+  line-height: 31px;
 }
 
 h2,
 .h2-like {
-  font-size: 22px;
-  line-height: 24px;
+  font-size: 26px;
+  line-height: 28px;
 }
 
 h3,
 .h3-like {
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 24px;
+  line-height: 26px;
 }
 
 h4,
 .h4-like,
 .h4-like-title {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 900;
-}
-
-h5,
-.h5-like {
-  font-size: 16px;
-  line-height: 18px;
 }
 
 ol[class],
@@ -533,11 +527,6 @@ a:hover {
   border-radius: 5px;
 }
 
-.form--column {
-  min-width: 500px;
-  max-width: 1000px;
-}
-
 .form--linear {
   min-width: 500px;
   max-width: 1000px;
@@ -565,9 +554,7 @@ a:hover {
 }
 
 .form--column {
-  min-width: 300px;
-  max-width: 500px;
-  width: 400px;
+  width: 90%;
 }
 
 .form--column > *:not(:last-child) {
@@ -726,11 +713,17 @@ input.ng-invalid:not(form).ng-touched.password-group {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .icon svg {
   fill: #585858;
   font-size: inherit;
+}
+
+.icon:hover svg {
+  fill: #FF9802;
 }
 
 .container {
@@ -1085,4 +1078,8 @@ input.ng-invalid:not(form).ng-touched.password-group {
 
 .spinner-wrap {
   grid-column: 1 / -1;
+}
+
+.job-new form {
+  width: 400px;
 }

@@ -28,8 +28,14 @@ export class JobMyComponent {
         .pipe(
           finalize(()=> this.loadingService.loadingOff())
         )
-
     this.freelanceList$ = this.jobService.getJobListByUserId('freelanceList');
   }
 
+  turnOnSerchMode (job:IJob){
+    this.jobService.searchMode = true;
+  }
+
+  turnOffSerchMode (job:IJob){
+    this.jobService.searchMode = false;
+  }
 }

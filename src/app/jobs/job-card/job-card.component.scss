@@ -9,21 +9,21 @@
     transition: transform 200ms ease-out;
     position: relative;
     transform-origin: top center;
-
     display: grid;
     grid-template-columns: 200px 60px;
     grid-template-rows: 25px 1fr 70px 50px;
+    grid-template-areas:
+    "pin pin"
+    "title title"
+    "location location"
+    "timeFrame cost";
+
     row-gap: 10px;
     column-gap: 10px;
     justify-content: center;
     align-items: center;
     justify-items: center;
-    grid-template-areas:
-        "pin pin"
-        "title title"
-        "location location"
-        "timeFrame cost"
-        "timeFrame cost";
+    
 
     &:hover {
         transform: scale(1.05);
@@ -63,6 +63,11 @@
         }
     }
 
+    &--std {
+        background-color: rgb(153, 135, 153);
+        transform: rotate(0deg);
+    }
+
     &__pin {
         grid-area: pin;
         width: 20px;
@@ -84,10 +89,6 @@
         align-items: center;
         transform: rotate(5deg);
 
-        span {
-            font-size: 24px;
-        }
-
         .icon {
             margin-right: 5px;
         }
@@ -95,7 +96,7 @@
 
     &__description {
         grid-area: description;
-        display: none;
+        // display: none;
     }
 
     &__timeFrame {
@@ -114,5 +115,13 @@
             display: inline-block;
             margin-left: 3px;
         }
+    }
+
+    &__owner {
+        grid-area: owner;
+    }
+
+    &__contact {
+        grid-area: contact;
     }
 }
