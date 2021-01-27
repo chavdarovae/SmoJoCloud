@@ -25,7 +25,7 @@
 
         <input type="button" class="btn" value="Clear Filter"
             [disabled]="categorySelect.errors?.required && locationSelect.errors?.required"
-            (click)="clearFilter(filterForm)" />
+            (click)="clearFilter()" />
     </form>
 
     <ng-container *ngIf="(jobList$ | async)">
