@@ -34,17 +34,30 @@ export class JobListComponent implements OnInit {
     this.jobService.searchMode = 'search' === this.activateRoute.snapshot.data.mode;
   }
 
+<<<<<<< HEAD
   ngOnInit() {
     const loadList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection);
             
     this.jobList$ =this.loadingService.showLoaderUntilCompleted( loadList$ );
+=======
+  ngOnInit(): void {
+    // this.loadingService.loadingOn();
 
-    this.locationSet$ = this.jobList$.pipe(
-      map(jobs=>Array.from(new Set(jobs.map(job=>job.location))).sort())
+    this.jobList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
+      .pipe(
+        // finalize(()=>this.loadingService.loadingOff())
+      );
+
+>>>>>>> b0023a3fe560f441fb3f068b72672ecae91e12c0
+
+    const loadJobs$ = this.loadingService.showLoaderUntilCompleted(this.jobList$);
+
+    this.locationSet$ = loadJobs$.pipe(
+      map(jobs => Array.from(new Set(jobs.map(job => job.location))).sort())
     )
 
-    this.categorySet$ = this.jobList$.pipe(
-      map(jobs=>Array.from(new Set(jobs.map(job=>job.category))).sort())
+    this.categorySet$ = loadJobs$.pipe(
+      map(jobs => Array.from(new Set(jobs.map(job => job.category))).sort())
     )
 
     concat(this.locationSet$,this.categorySet$).pipe(
