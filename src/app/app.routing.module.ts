@@ -18,8 +18,6 @@ const routes = [
     path: '**',
     component: NotFoundComponent
   },
-  
-
 ]
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

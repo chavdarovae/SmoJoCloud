@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ObserveOnSubscriber } from 'rxjs/internal/operators/observeOn';
+import { tap } from 'rxjs/operators';
+import { MessagesService } from '../services/messages.service';
 
 @Component({
   selector: 'app-messages',
@@ -6,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
+  errors$: Observable<string[]>;
+  showMessages: boolean = false; //to initially keep the message panel hiddens
+  
+  // When a service is public it is reachable by the template
+  constructor(public messagesService: MessagesService) { 
 
-  showMessages: boolean = false;
-  constructor() { }
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.errors$= this.messagesService.erros$
+      .pipe(
+        tap(()=> this.showMessages = true)
+      )
   }
 
   onClicked() {

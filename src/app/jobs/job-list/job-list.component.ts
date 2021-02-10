@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { concat, Observable } from 'rxjs';
-import { concatMap, finalize, map } from 'rxjs/operators';
+import { concat, Observable, throwError } from 'rxjs';
+import { catchError, concatMap, finalize, map } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
 import { LoadingService } from 'src/app/shared/loading.service';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -29,26 +30,24 @@ export class JobListComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private activateRoute: ActivatedRoute,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private messagesService: MessagesService
   ) {
     this.jobService.searchMode = 'search' === this.activateRoute.snapshot.data.mode;
   }
 
-<<<<<<< HEAD
   ngOnInit() {
-    const loadList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection);
-            
-    this.jobList$ =this.loadingService.showLoaderUntilCompleted( loadList$ );
-=======
-  ngOnInit(): void {
-    // this.loadingService.loadingOn();
-
-    this.jobList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
+    const loadList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
       .pipe(
-        // finalize(()=>this.loadingService.loadingOff())
+        catchError(err => {
+          const message = 'Something went wrong!'
+          this.messagesService.showErrors(message);
+          console.log(message, err);
+          return throwError(err)
+        })
       );
-
->>>>>>> b0023a3fe560f441fb3f068b72672ecae91e12c0
+            
+    this.jobList$ = this.loadingService.showLoaderUntilCompleted( loadList$ );
 
     const loadJobs$ = this.loadingService.showLoaderUntilCompleted(this.jobList$);
 
