@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { concat, Observable, throwError } from 'rxjs';
 import { catchError, concatMap, finalize, map } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
-import { JobStore } from 'src/app/shared/services/jobs.store';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { MessagesService } from 'src/app/shared/services/messages.service';
 import { JobService } from '../job.service';
@@ -30,7 +29,6 @@ export class JobListComponent implements OnInit {
 
   constructor(
     private jobService: JobService,
-    private jobStore: JobStore,
     private activateRoute: ActivatedRoute,
     private loadingService: LoadingService,
     private messagesService: MessagesService
@@ -67,12 +65,6 @@ export class JobListComponent implements OnInit {
         concatMap(()=>this.form.valueChanges)).subscribe(
           ()=>this.filter(this.form.value)
         );
-  
-    // this.reloadJobs();
-  }
-
-  reloadJobs() {
-    const loadList$ = this.jobStore.jobs$;
   }
 
   filter(input: { location: string, category: string }) {
