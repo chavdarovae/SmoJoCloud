@@ -1,12 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { concat, Observable, throwError } from 'rxjs';
-import { catchError, concatMap, finalize, map } from 'rxjs/operators';
+import { NgForm, NgSelectOption } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
 import { JobStore } from 'src/app/shared/services/jobs.store';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { MessagesService } from 'src/app/shared/services/messages.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -14,15 +11,13 @@ import { JobService } from '../job.service';
   templateUrl: './job-list.component.html',
   styleUrls: ['./job-list.component.scss']
 })
-export class JobListComponent implements OnInit {
+export class JobListComponent implements OnInit, AfterViewInit {
 
-  jobList$: Observable<[IJob]>;
-  locationSet$: Observable<String[]>;
-  categorySet$: Observable<String[]>;
+  jobList$: Observable<IJob[]>;
+  locationSet: String[];
+  categorySet: String[];
 
-  @ViewChild('filterForm', { read: NgForm })
-  form: any;
-  selectedValue: string;
+  @ViewChild('filterForm', { read: NgForm }) form: any;
 
   get searchMode() {
     return this.jobService.searchMode;
@@ -31,56 +26,34 @@ export class JobListComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private jobStore: JobStore,
-    private activateRoute: ActivatedRoute,
-    private loadingService: LoadingService,
-    private messagesService: MessagesService
+    private activateRoute: ActivatedRoute
   ) {
     this.jobService.searchMode = 'search' === this.activateRoute.snapshot.data.mode;
   }
 
   ngOnInit() {
-    const loadList$ = this.jobService.getJobList(this.activateRoute.snapshot.data.collection)
-      .pipe(
-        // We do need to add Error handling to our JobListComponent
-        catchError(err => {
-          const message = 'Could not load job list!'
-          this.messagesService.showErrors(message);
-          console.log(message, err);
-          // We do need to create an observable that replaces the observable that errored out
-          // This new obsevaable emits only one value: err, and that terminates here the observable chain
-          return throwError(err);
-        })
-      );
-      this.jobList$ = this.loadingService.showLoaderUntilCompleted( loadList$ );
+    this.reloadJobs();
+  }
 
-      const loadJobs$ = this.loadingService.showLoaderUntilCompleted(this.jobList$);
-  
-      this.locationSet$ = loadJobs$.pipe(
-        map(jobs => Array.from(new Set(jobs.map(job => job.location))).sort())
-      )
-  
-      this.categorySet$ = loadJobs$.pipe(
-        map(jobs => Array.from(new Set(jobs.map(job => job.category))).sort())
-      )
-  
-      concat(this.locationSet$,this.categorySet$).pipe(
-        concatMap(()=>this.form.valueChanges)).subscribe(
-          ()=>this.filter(this.form.value)
-        );
-  
-    // this.reloadJobs();
+  ngAfterViewInit() {
+    this.form.valueChanges.subscribe(()=>this.filter(this.form.value))
   }
 
   reloadJobs() {
-    const loadList$ = this.jobStore.jobs$;
+    // loads the ads from the store
+    this.jobList$ = this.searchMode ? this.jobStore.jobs$ : this.jobStore.freelances$;
+    // gets the location set from the store
+    this.locationSet = this.searchMode ? this.jobStore.jobLocationSet: this.jobStore.freelanceLocationSet;
+    // gets the category set from the store
+    this.categorySet = this.searchMode ? this.jobStore.jobCategorySet : this.jobStore.freelanceCategorySet;
   }
 
   filter(input: { location: string, category: string }) {
     const collection = this.activateRoute.snapshot.data.collection;
-    this.jobList$ = this.jobService.getFilteredJobList(collection, input.location, input.category);
+    this.jobList$ = this.jobStore.filterByLocationOrCategory(this.searchMode, input.location, input.category);
   }
 
   clearFilter(){
-    this.form.resetForm();
+    this.form.setValue({category: "", location: ""});
   }
 }
