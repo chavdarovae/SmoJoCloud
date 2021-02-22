@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { JobService } from 'src/app/jobs/job.service';
 import { IMsg } from 'src/app/shared/interfaces/message.interface';
-import { LoadingService } from 'src/app/shared/loading.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
  
   constructor(
     private jobService: JobService,
-    private loadingService: LoadingService,
+    private loadingService: LoadingService
     ){ }
 
   ngOnInit (): void  {

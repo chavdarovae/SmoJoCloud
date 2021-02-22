@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoadingService } from './shared/services/loading.service';
+import { MessagesService } from './shared/services/messages.service';
 import { UserService } from './user/user.service';
 
 @Component({

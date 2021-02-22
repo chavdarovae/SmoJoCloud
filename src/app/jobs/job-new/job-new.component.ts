@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
-import { LoadingService } from 'src/app/shared/loading.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 import { JobService } from '../job.service';
 
 @Component({

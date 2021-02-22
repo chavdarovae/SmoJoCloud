@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { finalize, map, mapTo } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
 import { IMsg } from 'src/app/shared/interfaces/message.interface';
-import { LoadingService } from 'src/app/shared/loading.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 import { JobService } from '../job.service';
 
 @Component({

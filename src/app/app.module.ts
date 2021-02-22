@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AppInterceptor } from './app.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingService } from './shared/services/loading.service';
+import { MessagesService } from './shared/services/messages.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
   ],
   providers: [
+    LoadingService,
+    MessagesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptor,

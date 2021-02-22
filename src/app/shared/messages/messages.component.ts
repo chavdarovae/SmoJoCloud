@@ -15,11 +15,11 @@ export class MessagesComponent implements OnInit {
   
   // When a service is public it is reachable by the template
   constructor(public messagesService: MessagesService) { 
-
+    console.log('Created messages component!');
   }
 
   ngOnInit() {
-    this.errors$= this.messagesService.erros$
+    this.errors$= this.messagesService.errors$
       .pipe(
         tap(()=> this.showMessages = true)
       )
