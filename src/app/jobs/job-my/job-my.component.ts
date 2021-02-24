@@ -1,41 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { JobService } from '../job.service';
+import { JobStore } from 'src/app/shared/services/jobs.store';
 
 @Component({
   selector: 'app-job-my',
   templateUrl: './job-my.component.html',
   styleUrls: ['./job-my.component.scss']
 })
-export class JobMyComponent {
+export class JobMyComponent implements OnInit {
 
-  jobList$: Observable<[IJob]>;
-  freelanceList$: Observable<[IJob]>;
+  jobList$: Observable<IJob[]>;
+  freelanceList$: Observable<IJob[]>;
 
   constructor(
-    private jobService: JobService,
-    private loadingService: LoadingService
-  ) { 
-    this.loadLists();
-  }
+    private jobStore: JobStore
+  ) {}
 
-  loadLists(){
-    this.loadingService.loadingOn();
-    this.jobList$ = this.jobService.getJobListByUserId('jobList')
-        .pipe(
-          finalize(()=> this.loadingService.loadingOff())
-        )
-    this.freelanceList$ = this.jobService.getJobListByUserId('freelanceList');
-  }
-
-  turnOnSerchMode (job:IJob){
-    this.jobService.searchMode = true;
-  }
-
-  turnOffSerchMode (job:IJob){
-    this.jobService.searchMode = false;
+  ngOnInit(){
+    this.jobList$ = this.jobStore.filterByUserId(true);
+    this.freelanceList$ = this.jobStore.filterByUserId(false);
   }
 }

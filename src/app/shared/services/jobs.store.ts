@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
+import { ThrowStmt } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, forkJoin, Observable, throwError } from "rxjs";
 import { catchError, map, shareReplay, tap } from "rxjs/operators";
+import { UserService } from "src/app/user/user.service";
 import { IJob } from "../interfaces/job.interface";
 import { LoadingService } from "./loading.service";
 import { MessagesService } from "./messages.service";
@@ -28,7 +30,8 @@ export class JobStore {
     constructor(
         private http: HttpClient,
         private loadingService: LoadingService,
-        private messagesService: MessagesService
+        private messagesService: MessagesService,
+        private userService: UserService
     ) {
         this.loadAllJobs();
     }
@@ -40,6 +43,46 @@ export class JobStore {
             map(ads => location ? ads.filter(ad => ad.location === location) : ads),
             map(ads => category ? ads.filter(ad => ad.category === category) : ads)
         )
+    }
+
+    // Filters by userId
+    filterByUserId(isSearchMode: boolean) {
+        const userId = this.userService.currUser.userId;
+        const filteredList$ = isSearchMode ? this.jobs$ : this.freelances$;
+        return filteredList$.pipe(
+            map(ads => ads.filter(ad => ad.ownerId === userId))
+        )
+    }
+
+    // Post a new AD
+    saveNewAd(ad: IJob, isSearchMode: boolean): Observable<any> {
+        const jobs = this.jobSubject.getValue();
+        const freelances = this.freelanceSubject.getValue();
+        return
+    }
+
+    // Update a new AD
+    updateAd(adId: string, changes: Partial<IJob>, isSearchMode: boolean): Observable<any> {
+        const adList = isSearchMode ? this.jobSubject.getValue() : this.freelanceSubject.getValue();
+        const index = adList.findIndex(ad => ad.objectId == adId);
+        const newAd: IJob = {
+            ...adList[index],
+            ...changes
+        }
+        const newAdList: IJob[] = adList.slice(0);
+        newAdList[index] = newAd;
+        const colletction = isSearchMode ? 'jobList' : 'freelanceList';
+        
+        if(isSearchMode) {
+            this.jobSubject.next(newAdList); 
+        } else {
+            this.freelanceSubject.next(newAdList); 
+        }
+        return this.http.put(`data/${colletction}/${adId}`, changes)
+                    .pipe(
+                        catchError(err => this.handleError(err, 'Could not save the job AD!')),
+                        shareReplay()
+                    );
     }
 
     // Loads all adds and creates sets for the locations and the categories

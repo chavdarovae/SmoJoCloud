@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs/operators';
 import { IJob } from 'src/app/shared/interfaces/job.interface';
+import { JobStore } from 'src/app/shared/services/jobs.store';
 import { LoadingService } from 'src/app/shared/services/loading.service';
+import { MessagesService } from 'src/app/shared/services/messages.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -19,11 +21,14 @@ export class JobNewComponent {
     'Gardening&Irrigation',
     'Cleaning&Housekeeping'
   ];
+  searchMode = true;
 
   constructor(
     private jobService: JobService,
     private router: Router,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private messagesService: MessagesService,
+    private jobSotre: JobStore
   ) { }
 
   submitHandler(jobToPost: IJob) {
@@ -36,20 +41,14 @@ export class JobNewComponent {
       default: jobToPost.color = 'tomato'; break;
     }
 
-    let collection = 'jobList'
-
     if (jobToPost.option === 'offer') {
-      collection = 'freelanceList'
+      this.searchMode = false
     }
     
-    this.loadingService.loadingOn();
-    this.jobService.postJob(jobToPost, collection)
-        .pipe(
-          finalize(()=>this.loadingService.loadingOff())
-        )
-        .subscribe(() => {
-      this.router.navigate(['']);
-    }, console.error);
+    this.jobSotre.saveNewAd(jobToPost, this.searchMode)
+      .pipe(
+        tap(res => this.router.navigate(['']))
+      ).subscribe();
   }
 
 }
