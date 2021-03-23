@@ -1,3 +1,4 @@
+import { AuthStore } from './../shared/services/auth.store';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
@@ -11,14 +12,16 @@ export class LoginComponent{
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private auth: AuthStore
   ) { }
 
 
-  submitHandler(data: {email: string, password: string}){
-    this.userService.login(data.email, data.password).subscribe(()=>{
-      this.router.navigate(['']);
-    }, console.error);
+  login(data: {email: string, password: string}): void{
+    this.auth.login(data.email, data.password)
+      .subscribe(
+        () => this.router.navigate(['']),
+        err => alert('Login failed!')
+      );
   }
-  
+
 }

@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading/loading.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MaterialModule } from '../material/material.module';
+import { EmailToNamePipe } from './pipes/email-to-name.pipe';
 
 
 
 @NgModule({
   declarations: [
     LoadingComponent,
-    MessagesComponent
+    MessagesComponent,
+    EmailToNamePipe
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { MaterialModule } from '../material/material.module';
   ],
   exports: [
     LoadingComponent,
-    MessagesComponent
+    MessagesComponent,
+    EmailToNamePipe
   ],
 })
 export class SharedModule { }

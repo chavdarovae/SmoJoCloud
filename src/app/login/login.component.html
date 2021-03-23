@@ -1,7 +1,7 @@
 <div class="container login column column--centered">
 
-    <form #loginForm="ngForm" class="form  form--column" (ngSubmit)="submitHandler(loginForm.value)">
-        
+    <form #loginForm="ngForm" class="form  form--column" (ngSubmit)="login(loginForm.value)">
+
         <div class="form__group">
             <label for="email">Email address</label>
             <input #emailInput="ngModel" ngModel name="email" type="text" id="email" class="form__control"

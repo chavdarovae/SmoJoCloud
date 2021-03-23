@@ -8,27 +8,29 @@
         </a>
 
         <div class="header__avatar avatar">
-            <ng-container *ngIf="!userIsLogged">
+            <ng-container *ngIf="auth.isLoggedOut$ | async">
                 <a routerLink="/login" class="avatar__icon" for="avatarMenuTriger">
                     <i class="fas fa-sign-in-alt"></i>
                 </a>
             </ng-container>
-            <ng-container *ngIf="userIsLogged">
-                <h3 class="avatar__name">{{name}}</h3>
+            <ng-container *ngIf="auth.isLoggedIn$ | async">
+                <h3 class="avatar__name">{{ (auth.user$ | async).username | emailToName }}</h3>
                 <a class="avatar__icon" (click)="showUserMenu=!showUserMenu">
                     <i class="fas fa-user"></i>
                 </a>
                 <div *ngIf="showUserMenu" class="backdrop" (click)="showUserMenu=!showUserMenu"></div>
                 <ul *ngIf="showUserMenu" class="avatar__menu menu animations-fancy-list">
-                    <li class="menu__item"><a routerLink="/jobs/new" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Post a new AD</a>
+                    <li class="menu__item">
+                      <a routerLink="/jobs/new" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Post a new AD</a>
                     </li>
-                    <li class="menu__item"><a routerLink="/jobs/my" class="menu__item-link" (click)="showUserMenu=!showUserMenu">My ADs</a>
+                    <li class="menu__item">
+                      <a routerLink="/jobs/my" class="menu__item-link" (click)="showUserMenu=!showUserMenu">My ADs</a>
                     </li>
-                    <li class="menu__item"><a routerLink="/user/profile" class="menu__item-link" (click)="showUserMenu=!showUserMenu">User
-                            profile</a>
+                    <li class="menu__item">
+                      <a routerLink="/user/profile" class="menu__item-link" (click)="showUserMenu=!showUserMenu">User profile</a>
                     </li>
-                   
-                    <li class="menu__item"><a (click)="logout()" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Logout</a></li>
+
+                    <li *ngIf="auth.isLoggedIn$ | async" class="menu__item"><a (click)="auth.logout()" class="menu__item-link" (click)="showUserMenu=!showUserMenu">Logout</a></li>
                 </ul>
             </ng-container>
             <div class="avatar__img">

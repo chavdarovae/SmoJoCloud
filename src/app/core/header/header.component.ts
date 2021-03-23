@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/user/user.service';
+import { AuthStore } from './../../shared/services/auth.store';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-header',
@@ -9,26 +9,7 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class HeaderComponent {
 
-  showUserMenu: boolean = false;
-  // @ViewChild ('userMenu') userMenu: ElementRef<HTMLElement>;
+  showUserMenu = false;
 
-  get userIsLogged (){
-    return this.userService.isLogged;
-  }
-
-  get name (){
-    return (this.userService.currUser.userName).match(/(.*)+(?=@)/g)[0];
-  }
-
-  constructor(
-    private userService : UserService,
-    private router : Router,
-  ) { }
-
-  logout() {
-    this.userService.logout().subscribe(() => {
-      this.userService.currUser = null;
-      this.router.navigate(['']);
-    });
-  }
+  constructor( public auth: AuthStore ) { }
 }

@@ -1,3 +1,5 @@
+import { IUser, IUserRes } from './shared/interfaces/user.interface';
+import { AUTH_DATA } from './app.constants';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -20,7 +22,9 @@ export class AppInterceptor implements HttpInterceptor {
     const fullUrl = req.url.includes('http') ? req.url : `${apiUrl}/${req.url}`;
     const isApiUrl = fullUrl.includes(apiUrl);
 
-    if (!isApiUrl) return;
+    if (!isApiUrl) {
+      return;
+    }
 
     if (fullUrl.includes('login') || fullUrl.includes('register')) {
       req = req.clone({
@@ -28,12 +32,12 @@ export class AppInterceptor implements HttpInterceptor {
         setHeaders: { 'Content-Type': 'application/json' }
       });
     } else {
-      const currUser: { userName: string, userToken: string } = JSON.parse(localStorage.getItem('curr-user'));
+      const currUser: IUserRes = JSON.parse(localStorage.getItem(AUTH_DATA));
       req = req.clone({
         url: fullUrl,
         setHeaders: {
           'Content-Type': 'application/json',
-          'user-token': `${currUser.userToken}`,
+          'user-token': `${currUser['user-token']}`,
         }
       });
     }

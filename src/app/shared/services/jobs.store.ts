@@ -58,7 +58,22 @@ export class JobStore {
     saveNewAd(ad: IJob, isSearchMode: boolean): Observable<any> {
         const jobs = this.jobSubject.getValue();
         const freelances = this.freelanceSubject.getValue();
-        return
+        const adList = isSearchMode ? this.jobSubject.getValue() : this.freelanceSubject.getValue();
+        const newAdList = adList.slice(0);
+        newAdList.push(ad);
+        
+        const colletction = isSearchMode ? 'jobList' : 'freelanceList';
+        if(isSearchMode) {
+            this.jobSubject.next(newAdList); 
+        } else {
+            this.freelanceSubject.next(newAdList); 
+        }
+        return this.http.post(`data/${colletction}`, ad)
+                    .pipe(
+                        catchError(err => this.handleError(err, 'Could not save the job AD!')),
+                        shareReplay()
+                    );
+
     }
 
     // Update a new AD
